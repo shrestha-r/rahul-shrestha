@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rahul Shrestha | Portfolio</title>
+  <meta name="description" content="Rahul Shrestha — CS with AI student seeking placement. Full-stack, databases, Java/Python/SQL." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="#top" aria-label="Go to top">RS</a>
+
+      <nav class="nav" aria-label="Primary navigation">
+        <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="burger"></span>
+        </button>
+
+        <div class="nav-links" id="navLinks">
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#experience">Experience</a>
+          <a href="#contact">Contact</a>
+          <a class="btn btn-small" href="#contact">Hire Me</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">BSc Computer Science with AI • Placement Seeking 2025–2026</p>
+          <h1>Hi, I’m <span class="accent">Rahul</span>.<br/>I build practical software.</h1>
+          <p class="lead">
+            I focus on <strong>full-stack web apps</strong>, <strong>database design</strong>, and strong fundamentals
+            in <strong>Java</strong>, <strong>Python</strong>, and <strong>SQL</strong>.
+          </p>
+
+          <div class="hero-cta">
+            <a class="btn" href="#projects">View Projects</a>
+            <a class="btn btn-ghost" href="#contact">Contact</a>
+          </div>
+
+          <div class="chips" aria-label="Highlights">
+            <span class="chip">PHP + MySQL</span>
+            <span class="chip">Java OOP</span>
+            <span class="chip">SQL Joins & Aggregation</span>
+            <span class="chip">Python ML Basics</span>
+            <span class="chip">Linux + Git</span>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="Quick info">
+          <div class="hero-card-top">
+            <div class="avatar" aria-hidden="true">RS</div>
+            <div>
+              <p class="name">Rahul Shrestha</p>
+              <p class="meta">London, UK • Student Developer</p>
+            </div>
+          </div>
+
+          <div class="hero-card-body">
+            <div class="stat">
+              <p class="stat-num" id="statProjects">0</p>
+              <p class="stat-label">Projects</p>
+            </div>
+            <div class="stat">
+              <p class="stat-num" id="statTech">0</p>
+              <p class="stat-label">Core Tech</p>
+            </div>
+            <div class="stat">
+              <p class="stat-num" id="statFocus">0</p>
+              <p class="stat-label">Focus Areas</p>
+            </div>
+          </div>
+
+          <div class="hero-card-actions">
+            <a class="btn btn-small" href="#" id="cvBtn">Download CV</a>
+            <a class="btn btn-small btn-ghost" href="#" id="githubBtn">GitHub</a>
+            <a class="btn btn-small btn-ghost" href="#" id="linkedinBtn">LinkedIn</a>
+          </div>
+
+          <p class="fine">
+            Tip: Update the links inside <code>script.js</code> (CV, GitHub, LinkedIn).
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-head">
+          <h2>Projects</h2>
+          <p>Selected work that shows full-stack, databases, and fundamentals.</p>
+        </div>
+
+        <div class="filters" role="group" aria-label="Project filters">
+          <button class="filter active" data-filter="all">All</button>
+          <button class="filter" data-filter="fullstack">Full-Stack</button>
+          <button class="filter" data-filter="database">Database</button>
+          <button class="filter" data-filter="java">Java</button>
+          <button class="filter" data-filter="ml">ML</button>
+        </div>
+
+        <div class="grid" id="projectGrid">
+          <!-- Cards injected by JS -->
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="container">
+        <div class="section-head">
+          <h2>Skills</h2>
+          <p>Tools and technologies I’m comfortable using in real projects.</p>
+        </div>
+
+        <div class="skills">
+          <div class="skill-card">
+            <h3>Languages</h3>
+            <ul>
+              <li>Java (OOP, console apps, fundamentals)</li>
+              <li>Python (data prep, ML basics)</li>
+              <li>SQL (joins, aggregation, schema thinking)</li>
+              <li>JavaScript (DOM, UI behavior)</li>
+              <li>PHP (server-side pages, forms, sessions)</li>
+            </ul>
+          </div>
+
+          <div class="skill-card">
+            <h3>Web + Databases</h3>
+            <ul>
+              <li>MySQL / MariaDB</li>
+              <li>Relational schema design</li>
+              <li>Auth patterns (sessions, protected pages)</li>
+              <li>HTML/CSS responsive layout</li>
+              <li>Validation and error handling</li>
+            </ul>
+          </div>
+
+          <div class="skill-card">
+            <h3>Tools</h3>
+            <ul>
+              <li>Git + GitHub (version control)</li>
+              <li>Linux/Ubuntu CLI</li>
+              <li>VS Code</li>
+              <li>XAMPP/phpMyAdmin</li>
+              <li>Documentation-first workflow</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="container">
+        <div class="section-head">
+          <h2>Experience</h2>
+          <p>What I’ve done alongside study.</p>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="dot" aria-hidden="true"></div>
+            <div class="timeline-content">
+              <h3>Student Projects (University)</h3>
+              <p class="muted">Full-stack + databases + ML fundamentals</p>
+              <ul>
+                <li>Built database-driven applications with PHP/MySQL and dynamic pages</li>
+                <li>Practised joins, grouping, ranking queries, and data validation</li>
+                <li>Implemented DSA concepts and wrote complexity notes</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="dot" aria-hidden="true"></div>
+            <div class="timeline-content">
+              <h3>Part-time Work (Agency / Support roles)</h3>
+              <p class="muted">Reliability • time management • communication</p>
+              <ul>
+                <li>Balanced university workload with consistent shifts</li>
+                <li>Worked in fast-paced environments with strong professionalism</li>
+                <li>Improved confidence communicating with different teams and people</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-head">
+          <h2>Contact</h2>
+          <p>Want to discuss a placement role or project? Send a message.</p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-card">
+            <h3>Quick Links</h3>
+            <p class="muted">Update these in <code>script.js</code>.</p>
+            <div class="link-list">
+              <a href="#" id="contactGithub">GitHub</a>
+              <a href="#" id="contactLinkedin">LinkedIn</a>
+              <a href="#" id="contactEmail">Email</a>
+            </div>
+
+            <div class="availability">
+              <p><strong>Placement:</strong> 2025–2026</p>
+              <p><strong>Location:</strong> London / Hybrid / Remote</p>
+              <p><strong>Roles:</strong> Software, Full-Stack, Backend, Data/AI (Junior)</p>
+            </div>
+          </div>
+
+          <form class="contact-form" id="contactForm">
+            <label>
+              Name
+              <input type="text" name="name" placeholder="Your name" required />
+            </label>
+
+            <label>
+              Email
+              <input type="email" name="email" placeholder="your@email.com" required />
+            </label>
+
+            <label>
+              Message
+              <textarea name="message" rows="6" placeholder="Tell me about the role or project..." required></textarea>
+            </label>
+
+            <button class="btn" type="submit">Send Message</button>
+            <p class="fine" id="formNote"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <p>© <span id="year"></span> Rahul Shrestha</p>
+        <p class="muted">Built with HTML/CSS/JS • Lightweight • Fast</p>
+      </div>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
