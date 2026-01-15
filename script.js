@@ -54,6 +54,14 @@ const PROJECTS = [
     tags: ["HTML", "CSS", "JavaScript"],
     type: ["fullstack"],
     repo: "https://github.com/your-username/portfolio",
+    demo: "#,top"
+  },
+    {
+    title: "Madan Shrestha",
+    description: "MCQ practice for Pharmacy questions",
+    tags: ["HTML", "CSS", "JavaScript"],
+    type: ["fullstack"],
+    repo: "https://www.rahul-shrestha.com.np/madan.html",
     demo: "#top"
   }
 ];

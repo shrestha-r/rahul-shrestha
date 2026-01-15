@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nepal Pharmacy Council License Exam - MCQ Practice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .stat-label {
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+
+        .quiz-area {
+            padding: 30px;
+        }
+
+        .question-container {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+        }
+
+        .question-number {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .question-text {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            line-height: 1.5;
+        }
+
+        .options {
+            display: grid;
+            gap: 12px;
+        }
+
+        .option {
+            padding: 15px 20px;
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+        }
+
+        .option:hover {
+            background: #f1f3f4;
+            border-color: #3498db;
+        }
+
+        .option.selected {
+            background: #3498db;
+            color: white;
+            border-color: #2980b9;
+        }
+
+        .option.correct {
+            background: #27ae60;
+            color: white;
+            border-color: #229954;
+        }
+
+        .option.incorrect {
+            background: #e74c3c;
+            color: white;
+            border-color: #c0392b;
+        }
+
+        .option.disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+        }
+
+        .btn-success {
+            background: #27ae60;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #229954;
+        }
+
+        .btn-warning {
+            background: #f39c12;
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background: #e67e22;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            transition: width 0.3s ease;
+        }
+
+        .result-area {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .result-score {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .result-message {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+        }
+
+        .explanation {
+            background: #e8f5e8;
+            border: 1px solid #27ae60;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            color: #2d5a2d;
+        }
+
+        .question-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 20px 0;
+            justify-content: center;
+        }
+
+        .nav-btn {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn.answered {
+            background: #27ae60;
+            color: white;
+            border-color: #27ae60;
+        }
+
+        .nav-btn.current {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 10px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .quiz-area {
+                padding: 20px;
+            }
+            
+            .controls {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .stats-bar {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Nepal Pharmacy Council License Exam</h1>
+            <p>Pharmacy Assistant - MCQ Practice Test</p>
+        </div>
+
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-number" id="currentQuestion">1</div>
+                <div class="stat-label">Current Question</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="totalQuestions">100</div>
+                <div class="stat-label">Total Questions</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="correctAnswers">0</div>
+                <div class="stat-label">Correct</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="score">0%</div>
+                <div class="stat-label">Score</div>
+            </div>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div class="question-nav" id="questionNav"></div>
+
+        <div class="quiz-area">
+            <div class="question-container">
+                <div class="question-number" id="questionNumber">Question 1 of 100</div>
+                <div class="question-text" id="questionText"></div>
+                <div class="options" id="optionsContainer"></div>
+                <div class="explanation" id="explanation" style="display: none;"></div>
+            </div>
+
+            <div class="controls">
+                <button class="btn btn-warning" id="prevBtn" onclick="previousQuestion()">Previous</button>
+                <div>
+                    <button class="btn btn-primary" id="checkBtn" onclick="checkAnswer()">Check Answer</button>
+                    <button class="btn btn-success" id="nextBtn" onclick="nextQuestion()">Next</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="result-area" id="resultArea" style="display: none;">
+            <div class="result-score" id="finalScore">0%</div>
+            <div class="result-message" id="resultMessage"></div>
+            <button class="btn btn-primary" onclick="restartQuiz()">Restart Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        // All questions extracted from the provided content
+        const questions = [
+            {
+                question: "Polio vaccine should be stored at",
+                options: ["Below 0°C", "2-8°C", "8-25°C", "0-2°C"],
+                correct: 1,
+                explanation: "Polio vaccine should be stored at 2-8°C to maintain its efficacy."
+            },
+            {
+                question: "Extraction of drug from the plant is done",
+                options: ["Percolation", "Maceration", "Solvent extraction", "All of the above"],
+                correct: 3,
+                explanation: "Drug extraction from plants can be done through percolation, maceration, and solvent extraction methods."
+            },
+            {
+                question: "Who applies for registration of medicine for import in Nepal?",
+                options: ["Manufacturer", "Authorized importer", "Hospital", "Nepal Chemist and druggist Association"],
+                correct: 1,
+                explanation: "Authorized importers are responsible for applying for medicine registration for import in Nepal."
+            },
+            {
+                question: "Volume not more than should be administered by syringe",
+                options: ["0.2ml", "5ml", "20ml", "10ml"],
+                correct: 3,
+                explanation: "The maximum volume that should be administered by syringe is 10ml."
+            },
+            {
+                question: "Drug used for treatment of Acute gout?",
+                options: ["Febuxostat", "NSAIDS", "Allopurinol", "Acetazolamide"],
+                correct: 1,
+                explanation: "NSAIDs are the primary treatment for acute gout attacks."
+            },
+            {
+                question: "Which of following is an non sedating antihistamine?",
+                options: ["Promethazine", "Cetirizine", "Phenaramine", "Cyproheptadine"],
+                correct: 1,
+                explanation: "Cetirizine is a non-sedating antihistamine."
+            },
+            {
+                question: "A m-cholinomimetic agent",
+                options: ["Carbachol", "Pilocarpine", "Ach", "Bethanechol"],
+                correct: 1,
+                explanation: "Pilocarpine is an m-cholinomimetic agent."
+            },
+            {
+                question: "Methotrexate 7.5mg taking patient which drug is use in supplement",
+                options: ["HCTZ", "Folic Acid", "Ampicillin", "All"],
+                correct: 1,
+                explanation: "Folic acid supplementation is used in patients taking methotrexate to reduce side effects."
+            },
+            {
+                question: "The antidote for gold is",
+                options: ["BAL", "Tannin", "Lime", "Copper sulphate"],
+                correct: 0,
+                explanation: "BAL (British Anti-Lewisite) is the antidote for gold poisoning."
+            },
+            {
+                question: "Folxgloves contain",
+                options: ["Cardiac glycosides", "Alkaloids", "Saponin", "All of Above"],
+                correct: 0,
+                explanation: "Foxgloves contain cardiac glycosides, primarily digoxin."
+            },
+            {
+                question: "Which of the following occurs as crystals ?",
+                options: ["Alkaloids", "Tannins", "Resins", "All of above"],
+                correct: 3,
+                explanation: "Alkaloids, tannins, and resins can all occur as crystals."
+            },
+            {
+                question: "How many grams of boric acid should be used in compounding the following prescription: Phenacaine HCL 1% (NaCl Eq.=0.17), Chlorobutanol 0.5 % (NaCl Eq.o.18), Boric acid qs(Nacl eq.=0.52), Purified water add 30ml, Make isotonic solution",
+                options: ["0.37g", "0.74g", "0.27g", "0.47g"],
+                correct: 2,
+                explanation: "The calculation shows that 0.27g of boric acid is needed to make the solution isotonic."
+            },
+            {
+                question: "The prescription is given to the pharmacist to dispense Rx: calciferol 03, water to q.s 5.0ml, send 25ml. Final dosages form of this prescription will be",
+                options: ["Solution", "Elixir", "Emulsion", "Suspension"],
+                correct: 3,
+                explanation: "The final dosage form will be a suspension due to the concentration and solubility characteristics."
+            },
+            {
+                question: "For preparing primary emulsion, oils water and gum are added in the ratio of",
+                options: ["4:2:1", "3:2:1", "2:4:3", "1:2:3"],
+                correct: 0,
+                explanation: "The standard ratio for primary emulsion preparation is 4:2:1 (oil:water:gum)."
+            },
+            {
+                question: "According to NDP 2051 BS procurement of drug should be made under",
+                options: ["Generic Name", "Brand Name", "Trade Name", "Company Name"],
+                correct: 0,
+                explanation: "According to NDP 2051 BS, drug procurement should be made under generic names."
+            },
+            {
+                question: "The end colour of phenolphthalein titrating with standard base solution is",
+                options: ["Pink", "Colorless", "Yellow", "Orange"],
+                correct: 0,
+                explanation: "Phenolphthalein turns pink in basic solutions."
+            },
+            {
+                question: "Propanolol is clinically used as",
+                options: ["Anxiety", "Asthma", "Cirrhosis of liver", "None"],
+                correct: 0,
+                explanation: "Propranolol is used clinically for anxiety, among other conditions."
+            },
+            {
+                question: "Which of the following drug is carminative drug of following",
+                options: ["Nutmeg", "Vinca", "Digitalis", "Cardamom"],
+                correct: 3,
+                explanation: "Cardamom is a carminative drug."
+            },
+            {
+                question: "Which of the following drug adverse effect is specially noted in men compared to women",
+                options: ["Tardive dyskinesia due to neuroleptics", "Levodopa induced abnormal movement", "Ampicillin induced loss motion", "Ketoconazole induced loss of libido"],
+                correct: 3,
+                explanation: "Ketoconazole-induced loss of libido is more commonly noted in men."
+            },
+            {
+                question: "Which of the following drug is less effective in patient suffering from liver disease",
+                options: ["Drug having higher presystemic metabolism", "Prodrug", "Acidic drug", "Basic drug"],
+                correct: 0,
+                explanation: "Drugs with higher presystemic metabolism are less effective in liver disease patients."
+            },
+            {
+                question: "Which of the following contains quinazoline alkaloids ?",
+                options: ["Dhatura", "Vaska", "Kurchi", "Ephedra"],
+                correct: 1,
+                explanation: "Vaska contains quinazoline alkaloids."
+            },
+            {
+                question: "Which of the following is causes of Therapeutic incompatibility ?",
+                options: ["Over dose", "Wrong Dose", "Contraindication", "All"],
+                correct: 3,
+                explanation: "All of these can cause therapeutic incompatibility."
+            },
+            {
+                question: "Which herb loses its activity more rapidly when dried in sun light ?",
+                options: ["Berberis", "Digitalis", "Curcuma longa", "Podophyllum"],
+                correct: 1,
+                explanation: "Digitalis loses its activity more rapidly when dried in sunlight."
+            },
+            {
+                question: "Gas used in aerosol is called",
+                options: ["API", "Propellant", "Liquid phase", "None of the above"],
+                correct: 1,
+                explanation: "The gas used in aerosols is called propellant."
+            },
+            {
+                question: "Microbiological assay for antibiotics are based on",
+                options: ["Amount of growth factor that support", "Fermentation process", "Degree of inhibition of growth of culture", "None of above"],
+                correct: 2,
+                explanation: "Microbiological assays for antibiotics are based on the degree of inhibition of microbial growth."
+            },
+            {
+                question: "For lactating mother the drug is generally not recommended",
+                options: ["Ampicillin", "Amoxycillin", "Chloramphenical", "B-Complex"],
+                correct: 2,
+                explanation: "Chloramphenicol is generally not recommended for lactating mothers due to potential toxicity."
+            },
+            {
+                question: "Drug interaction can be best avoided by",
+                options: ["Allowing proper spacing in between their use", "Using alternative drug", "Avoiding simultaneous use", "All of the above"],
+                correct: 3,
+                explanation: "All of these methods can help avoid drug interactions."
+            },
+            {
+                question: "Amoxycillin is very important antibiotics drug. What dosages form are generally given in children ?",
+                options: ["Tablet", "Capsule", "Dispersible Tablet", "Injection"],
+                correct: 2,
+                explanation: "Dispersible tablets are commonly used for children as they can be dissolved in water."
+            },
+            {
+                question: "Which of the following drug is used to treat giardiasis ?",
+                options: ["Furazolidone", "Mepacrine", "Metronidazole", "All"],
+                correct: 3,
+                explanation: "All of these drugs can be used to treat giardiasis."
+            },
+            {
+                question: "Morphine acetylation gives",
+                options: ["Diamorphine", "Heroin", "Cocaine", "Pethidine"],
+                correct: 1,
+                explanation: "Morphine acetylation produces heroin (diacetylmorphine)."
+            },
+            {
+                question: "Publication of Nepalese national formulary is the objective of",
+                options: ["National Health Policy", "National Drug Policy", "Drug Act", "Long term health policy"],
+                correct: 1,
+                explanation: "The publication of the Nepalese national formulary is an objective of the National Drug Policy."
+            },
+            {
+                question: "The following compound is 350 times sweeter than sucrose",
+                options: ["Aspartame", "Cyclamate", "Sodium Cyclamate", "Fructose"],
+                correct: 1,
+                explanation: "Cyclamate is approximately 350 times sweeter than sucrose."
+            },
+            {
+                question: "Additives in dosages forms are",
+                options: ["API", "Binder used during formulations", "Packaging materials", "None"],
+                correct: 1,
+                explanation: "Additives in dosage forms include binders used during formulations."
+            },
+            {
+                question: "Flame photometer is not used detecting",
+                options: ["Calcium", "Sodium", "Potassium", "Barium"],
+                correct: 3,
+                explanation: "Flame photometry is not typically used for detecting barium."
+            },
+            {
+                question: "What is the meaning of OS in the abbreviations",
+                options: ["Once single use", "Outside", "Left eye", "All"],
+                correct: 2,
+                explanation: "OS stands for 'left eye' in medical abbreviations."
+            },
+            {
+                question: "Omeprazoles heals the stomach ulcer by",
+                options: ["Coating on ulcer", "Increasing the release of gastric acid", "Reducing the gastric acid production", "Neutralizing Acid"],
+                correct: 2,
+                explanation: "Omeprazole heals stomach ulcers by reducing gastric acid production through proton pump inhibition."
+            },
+            {
+                question: "To avoid the expiry of drug, which method is best suitable ?",
+                options: ["FEFO", "FIFO", "Bin card", "Maintain log book of drug sale"],
+                correct: 0,
+                explanation: "FEFO (First Expired, First Out) is the best method to avoid drug expiry."
+            },
+            {
+                question: "Which of the following is not solid dosages form",
+                options: ["Tablet", "Cream", "Powder", "All"],
+                correct: 1,
+                explanation: "Cream is not a solid dosage form; it's a semisolid formulation."
+            },
+            {
+                question: "A substance that reduces the contact angle between a surface and liquid is known as",
+                options: ["Flocculating", "Wetting", "Foaming agent", "Coagulating agent"],
+                correct: 1,
+                explanation: "A wetting agent reduces the contact angle between a surface and liquid."
+            },
+            {
+                question: "Which of the following post is for Director general department of health service in drug advisory committee ?",
+                options: ["Chairperson", "Vice Chairperson", "Member", "Member Secretary"],
+                correct: 2,
+                explanation: "The Director General of the Department of Health Service serves as a member of the drug advisory committee."
+            },
+            {
+                question: "Inspector means a person deputed by the department for the purpose of",
+                options: ["Chapter 6", "Section 4", "Chapter 7", "Section 6"],
+                correct: 1,
+                explanation: "Inspector is defined under Section 4 of the relevant regulations."
+            },
+            {
+                question: "The usual dose of secnidazole is",
+                options: ["500mg TDS", "400mg TDS", "1gm STAT", "2g STAT"],
+                correct: 3,
+                explanation: "The usual dose of secnidazole is 2g as a single dose (STAT)."
+            },
+            {
+                question: "Which of the following drug may causes Hirsutism",
+                options: ["Acetazolamide", "Amphetamine", "Ranitidine", "All"],
+                correct: 3,
+                explanation: "All of these drugs can potentially cause hirsutism as a side effect."
+            },
+            {
+                question: "Which of the following plant contain both alkaloids and glycosides",
+                options: ["Hyocymus", "Aconitine", "Withania", "Stramonium"],
+                correct: 2,
+                explanation: "Withania contains both alkaloids and glycosides."
+            },
+            {
+                question: "Which section of drug mfg code 2041 provides the provisions for parentral preparations",
+                options: ["6.1", "6.2", "6.3", "6.4"],
+                correct: 2,
+                explanation: "Section 6.3 of the drug manufacturing code 2041 provides provisions for parenteral preparations."
+            },
+            {
+                question: "Which statement is not true about enteric coated tablets",
+                options: ["Should be crushed", "Should not be taken with antacid", "Should not be swallowed whole", "None of the above"],
+                correct: 0,
+                explanation: "Enteric coated tablets should NOT be crushed as it destroys the coating."
+            },
+            {
+                question: "The full form of STG is",
+                options: ["Standard Teaching Guidelines", "Standard Technical group", "Standard Treatment Guideline", "Standard treatment group"],
+                correct: 2,
+                explanation: "STG stands for Standard Treatment Guidelines."
+            },
+            {
+                question: "One of the aim of the use of suspending agents in suspension is to control",
+                options: ["pH", "Tonicity", "Microbial growth", "Viscosity"],
+                correct: 3,
+                explanation: "Suspending agents are used to control viscosity in suspensions."
+            },
+            {
+                question: "Semisolid dosages form denotes the",
+                options: ["Topical powder", "Lotion", "Suspension", "Syrup"],
+                correct: 1,
+                explanation: "Lotions are examples of semisolid dosage forms."
+            },
+            {
+                question: "Which of the following is topical corticosteroids ?",
+                options: ["Flucinolone", "Hydrocortisone", "Predisolone", "Dexamethasone"],
+                correct: 0,
+                explanation: "Flucinolone is a topical corticosteroid."
+            },
+            {
+                question: "Which of the following is classified as an antacid",
+                options: ["Pantoprazole", "Ranitidine", "Sodium bicarbonate", "ALL"],
+                correct: 2,
+                explanation: "Sodium bicarbonate is classified as an antacid."
+            },
+            {
+                question: "Suppositories should be stored in…………?",
+                options: ["Cool place", "Cold place", "Frozen condition", "All"],
+                correct: 0,
+                explanation: "Suppositories should be stored in a cool place."
+            },
+            {
+                question: "Which of the following vitamin deficiency cause pellagra",
+                options: ["Methylcoblamine", "Thiamin", "Niacin", "Riboflavin"],
+                correct: 2,
+                explanation: "Niacin (vitamin B3) deficiency causes pellagra."
+            },
+            {
+                question: "All of the following are side effect of tetracycline except",
+                options: ["Brown discoloration of teeth", "Photo toxicity", "Gastric discomfort", "Ototoxicity"],
+                correct: 3,
+                explanation: "Ototoxicity is not a typical side effect of tetracycline."
+            },
+            {
+                question: "Dalchini is commonly known as……………",
+                options: ["Cardamom", "Ginger", "Cinnamon", "Glycyrrhiza"],
+                correct: 2,
+                explanation: "Dalchini is commonly known as cinnamon."
+            },
+            {
+                question: "The following drug may flu like syndrome……….",
+                options: ["Rifampicin", "Tetracycline", "Vancomycin", "Stevens-Johnson syndrome"],
+                correct: 0,
+                explanation: "Rifampicin can cause flu-like syndrome as a side effect."
+            },
+            {
+                question: "All of the following are antihypertensive except",
+                options: ["Digoxin", "Methyldopa", "Diltiazem", "Lisinopril"],
+                correct: 0,
+                explanation: "Digoxin is a cardiac glycoside, not primarily an antihypertensive."
+            },
+            {
+                question: "Which of the following is not a tricyclic antidepressant",
+                options: ["Trimipramine", "Fluoxetine", "Amitryptaline", "Imipramine"],
+                correct: 1,
+                explanation: "Fluoxetine is an SSRI, not a tricyclic antidepressant."
+            },
+            {
+                question: "Association of Pharmaceutical Procedure of Nepal was established in the year",
+                options: ["1995 A.D.", "1990 A.D.", "1972 A.D", "1999 A.D."],
+                correct: 2,
+                explanation: "The Association of Pharmaceutical Procedure of Nepal was established in 1972 A.D."
+            },
+            {
+                question: "Beriberi is caused by deficiency of",
+                options: ["Vitamin B1", "Vitamin B6", "Vitamin B2", "Vitamin B2"],
+                correct: 0,
+                explanation: "Beriberi is caused by vitamin B1 (thiamine) deficiency."
+            },
+            {
+                question: "One of the following is titrimetric method",
+                options: ["Volumetric method", "Gravimetric", "Quantitative analysis", "Polarimetry"],
+                correct: 0,
+                explanation: "Volumetric method is a type of titrimetric analysis."
+            },
+            {
+                question: "An organic ion which is used prophylactically in bipolar depression is",
+                options: ["Valporate", "Lithium", "Chromium", "Sodium"],
+                correct: 1,
+                explanation: "Lithium is used prophylactically in bipolar depression."
+            },
+            {
+                question: "Asuro belongs to the family",
+                options: ["Solaneaceae", "Apocynaceae", "Liliaceae", "Acanthaceae"],
+                correct: 3,
+                explanation: "Asuro belongs to the Acanthaceae family."
+            },
+            {
+                question: "Rayer's syndrome is the most common side effect of which of the following categories drug",
+                options: ["Aspirin", "Macrolides", "Penicillines", "Tetracylines"],
+                correct: 0,
+                explanation: "Reye's syndrome is associated with aspirin use in children."
+            },
+            {
+                question: "Drug registration and regulation was issued by government of Nepal in",
+                options: ["2037", "2038", "2041", "2045"],
+                correct: 2,
+                explanation: "Drug registration and regulation was issued by the government of Nepal in 2041 BS."
+            },
+            {
+                question: "Which of the following is sweetening agent for diabetic patients in the pharmaceutical industry ?",
+                options: ["Aspartame", "Sucrose", "Fructose", "All"],
+                correct: 0,
+                explanation: "Aspartame is a suitable sweetening agent for diabetic patients."
+            },
+            {
+                question: "The first pharmacist was",
+                options: ["Hippocrates", "Galen", "Alexander", "Nabin"],
+                correct: 1,
+                explanation: "Galen is considered one of the first pharmacists."
+            },
+            {
+                question: "First Hospital Pharmacy of Nepal was",
+                options: ["Kanti Hospital", "Patan Hospital", "Bir Hospital", "Teaching Hospital"],
+                correct: 2,
+                explanation: "Bir Hospital had the first hospital pharmacy in Nepal."
+            },
+            {
+                question: "Drug used in vaginal candidiasis",
+                options: ["Fluconazole", "Cefexime", "Azithromycin", "All"],
+                correct: 0,
+                explanation: "Fluconazole is the drug of choice for vaginal candidiasis."
+            },
+            {
+                question: "Senna is performed in………drying",
+                options: ["Tray", "Naturally in shade or sun", "Spray", "Vacuum"],
+                correct: 1,
+                explanation: "Senna is typically dried naturally in shade or sun."
+            },
+            {
+                question: "Nepal adopt PHC in",
+                options: ["Oct 1977", "Oct 1978", "Oct 1992", "Oct 1979"],
+                correct: 1,
+                explanation: "Nepal adopted Primary Health Care (PHC) in October 1978."
+            },
+            {
+                question: "Which of the following is not added in lozenges",
+                options: ["Binder", "Disintegration", "Sweetener", "All"],
+                correct: 1,
+                explanation: "Disintegration agents are not typically added to lozenges as they are meant to dissolve slowly."
+            },
+            {
+                question: "0.10% cocaine containing pharmaceutical product is categorized as",
+                options: ["Samuha ka", "Samuha kha", "Samuha ga", "None"],
+                correct: 2,
+                explanation: "0.10% cocaine containing products are categorized as Samuha ga."
+            },
+            {
+                question: "Under which section of drug act 2035 there is the provision of investigation and filling of case?",
+                options: ["39", "31", "37", "40"],
+                correct: 0,
+                explanation: "Section 39 of the Drug Act 2035 provides for investigation and case filing."
+            },
+            {
+                question: "The example of phase I drug metabolizing reaction is",
+                options: ["Reduction", "Oxidation", "Hydrolysis", "All"],
+                correct: 3,
+                explanation: "All of these are examples of phase I drug metabolizing reactions."
+            },
+            {
+                question: "Prolonged lithium therapy causes",
+                options: ["Renal impairment", "Osteoporosis", "Parkinsonism", "Gout"],
+                correct: 0,
+                explanation: "Prolonged lithium therapy can cause renal impairment."
+            },
+            {
+                question: "The rate of bioavailability is most rapid when the drug is formulated as a",
+                options: ["Controlled release (CR)", "Hard gelatin capsules", "Tablet", "Solutions"],
+                correct: 3,
+                explanation: "Solutions provide the most rapid bioavailability among these options."
+            },
+            {
+                question: "In pharmaceutical quality system GMP is the part of",
+                options: ["IPQC", "Maintenance", "QC", "QA"],
+                correct: 3,
+                explanation: "GMP (Good Manufacturing Practice) is part of Quality Assurance (QA)."
+            },
+            {
+                question: "Anemia results from dietary deficiency of all except",
+                options: ["Folic acid", "Vit B12", "Iron", "Vit D"],
+                correct: 3,
+                explanation: "Vitamin D deficiency does not cause anemia."
+            },
+            {
+                question: "Major side effect of INH is",
+                options: ["Headache", "Anaphylactic shock", "Peripheral neuropathy", "Constipation"],
+                correct: 2,
+                explanation: "Peripheral neuropathy is a major side effect of isoniazid (INH)."
+            },
+            {
+                question: "Which of the following have tranquilizer action?",
+                options: ["Rauwolfia", "Cocaine", "Cannabis", "Opium"],
+                correct: 0,
+                explanation: "Rauwolfia has tranquilizer action due to its reserpine content."
+            },
+            {
+                question: "All of the following have antiasthmatic Action except",
+                options: ["Ephedra", "Lobelia", "Vinca", "Vasaka"],
+                correct: 2,
+                explanation: "Vinca does not have antiasthmatic action."
+            },
+            {
+                question: "Main chemical constituents of clove",
+                options: ["Eugenol", "Linalool", "Cineole", "Anethole"],
+                correct: 0,
+                explanation: "Eugenol is the main chemical constituent of clove."
+            },
+            {
+                question: "Most common method for extraction of volatile oils is",
+                options: ["Distillation", "Percolation", "Decoction", "Enfleurage"],
+                correct: 0,
+                explanation: "Distillation is the most common method for extracting volatile oils."
+            },
+            {
+                question: "Volatiles oils are also called as",
+                options: ["Lipids", "Essential oils", "Non essential oils", "Fixed oils"],
+                correct: 1,
+                explanation: "Volatile oils are also called essential oils."
+            },
+            {
+                question: "The plant part cinnamon used for medicinal value is",
+                options: ["Root", "Bark", "Stem", "Leaf"],
+                correct: 1,
+                explanation: "The bark of cinnamon is used for medicinal purposes."
+            },
+            {
+                question: "The meaning of HS in prescription is",
+                options: ["At morning", "At night", "Twice a day", "All"],
+                correct: 1,
+                explanation: "HS stands for 'hora somni' meaning 'at night' in prescriptions."
+            },
+            {
+                question: "The scientific name of Gurjo is",
+                options: ["Piper longum", "Terminalia chebula", "Tinospora cordifolia", "None"],
+                correct: 2,
+                explanation: "The scientific name of Gurjo (Guduchi) is Tinospora cordifolia."
+            },
+            {
+                question: "Which of the following antihypertensive drug used in COPD patients",
+                options: ["Amlodipine", "Captopril", "Propranolol", "All"],
+                correct: 0,
+                explanation: "Amlodipine is safe to use in COPD patients as it doesn't affect respiratory function."
+            },
+            {
+                question: "The position of pharmacist in Hospital drug and therapeutic committee is",
+                options: ["Secretary", "Member", "Chairman", "All"],
+                correct: 1,
+                explanation: "The pharmacist serves as a member of the hospital drug and therapeutic committee."
+            },
+            {
+                question: "The calories value of lipid is ………………",
+                options: ["6.0 cal/g", "9.0 cal/g", "15 cal/g", "12 cal/g"],
+                correct: 1,
+                explanation: "Lipids provide 9.0 calories per gram."
+            },
+            {
+                question: "The PH range of the phenolphthalein indicator is",
+                options: ["6.8 - 8.0", "3.1-5.5", "2.8-4.4", "8.3-10"],
+                correct: 3,
+                explanation: "Phenolphthalein indicator has a pH range of 8.3-10."
+            },
+            {
+                question: "The pro drug of epinephrine is",
+                options: ["Dipivefrine", "E 3174", "Canrenone", "none"],
+                correct: 0,
+                explanation: "Dipivefrine is the prodrug of epinephrine."
+            },
+            {
+                question: "Which of the following drug goes under decyclization reaction",
+                options: ["Propranolol", "Cimetidine", "Phenytoin", "Rifampicin"],
+                correct: 1,
+                explanation: "Cimetidine undergoes decyclization reaction."
+            },
+            {
+                question: "Which of the following drug is enzyme inducer drug",
+                options: ["Griseofulvin", "Phenytoin", "Rifampicin", "All"],
+                correct: 3,
+                explanation: "All of these drugs are enzyme inducers."
+            },
+            {
+                question: "The gas used in aerosol is called",
+                options: ["Propellant", "Solvent", "Medicament", "All"],
+                correct: 0,
+                explanation: "The gas used in aerosols is called propellant."
+            },
+            {
+                question: "Tablets designed for rectal administration is called",
+                options: ["Lozenges", "Troches", "Suppositories", "Enemas"],
+                correct: 2,
+                explanation: "Tablets designed for rectal administration are called suppositories."
+            },
+            {
+                question: "Viscosity enhancer in ophthalmic preparation",
+                options: ["Povidone", "Macrogol", "Dextran", "Polyvinyl alcohol"],
+                correct: 2,
+                explanation: "Dextran is used as a viscosity enhancer in ophthalmic preparations."
+            },
+            {
+                question: "Which of the following pharmacopeia is not official in Nepal?",
+                options: ["IP", "BP", "USP", "NONE"],
+                correct: 3,
+                explanation: "All listed pharmacopeias (IP, BP, USP) are official in Nepal, so the answer is NONE."
+            },
+            {
+                question: "To fix price of the drug is the functions of",
+                options: ["Drug advisory committee", "Drug consultative council", "DDA", "NPC"],
+                correct: 1,
+                explanation: "The Drug Consultative Council is responsible for fixing drug prices."
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let answeredQuestions = new Set();
+        let userAnswers = {};
+
+        function initializeQuiz() {
+            createNavigation();
+            displayQuestion();
+            updateStats();
+        }
+
+        function createNavigation() {
+            const navContainer = document.getElementById('questionNav');
+            navContainer.innerHTML = '';
+            
+            for (let i = 0; i < questions.length; i++) {
+                const navBtn = document.createElement('button');
+                navBtn.className = 'nav-btn';
+                navBtn.textContent = i + 1;
+                navBtn.onclick = () => goToQuestion(i);
+                
+                if (answeredQuestions.has(i)) {
+                    navBtn.classList.add('answered');
+                }
+                if (i === currentQuestion) {
+                    navBtn.classList.add('current');
+                }
+                
+                navContainer.appendChild(navBtn);
+            }
+        }
+
+        function displayQuestion() {
+            const question = questions[currentQuestion];
+            document.getElementById('questionNumber').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            document.getElementById('questionText').textContent = question.question;
+            
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option';
+                optionDiv.textContent = String.fromCharCode(97 + index) + '. ' + option;
+                optionDiv.onclick = () => selectOption(index);
+                
+                if (userAnswers[currentQuestion] !== undefined) {
+                    optionDiv.classList.add('disabled');
+                    if (index === question.correct) {
+                        optionDiv.classList.add('correct');
+                    } else if (index === userAnswers[currentQuestion]) {
+                        optionDiv.classList.add('incorrect');
+                    }
+                }
+                
+                optionsContainer.appendChild(optionDiv);
+            });
+            
+            // Show explanation if question is answered
+            const explanationDiv = document.getElementById('explanation');
+            if (userAnswers[currentQuestion] !== undefined) {
+                explanationDiv.style.display = 'block';
+                explanationDiv.textContent = question.explanation;
+            } else {
+                explanationDiv.style.display = 'none';
+            }
+            
+            // Update navigation
+            createNavigation();
+            
+            // Update button states
+            document.getElementById('prevBtn').disabled = currentQuestion === 0;
+            document.getElementById('nextBtn').textContent = currentQuestion === questions.length - 1 ? 'Finish' : 'Next';
+            
+            // Update check button
+            const checkBtn = document.getElementById('checkBtn');
+            if (userAnswers[currentQuestion] !== undefined) {
+                checkBtn.textContent = 'Answered';
+                checkBtn.disabled = true;
+            } else {
+                checkBtn.textContent = 'Check Answer';
+                checkBtn.disabled = false;
+            }
+            
+            // Update progress
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function selectOption(index) {
+            if (userAnswers[currentQuestion] !== undefined) return;
+            
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => option.classList.remove('selected'));
+            options[index].classList.add('selected');
+        }
+
+        function checkAnswer() {
+            const selectedOption = document.querySelector('.option.selected');
+            if (!selectedOption) {
+                alert('Please select an answer!');
+                return;
+            }
+            
+            const question = questions[currentQuestion];
+            const selectedIndex = Array.from(document.querySelectorAll('.option')).indexOf(selectedOption);
+            
+            userAnswers[currentQuestion] = selectedIndex;
+            answeredQuestions.add(currentQuestion);
+            
+            // Show correct/incorrect styling
+            const options = document.querySelectorAll('.option');
+            options.forEach((option, index) => {
+                option.classList.add('disabled');
+                if (index === question.correct) {
+                    option.classList.add('correct');
+                } else if (index === selectedIndex) {
+                    option.classList.add('incorrect');
+                }
+            });
+            
+            // Show explanation
+            document.getElementById('explanation').style.display = 'block';
+            document.getElementById('explanation').textContent = question.explanation;
+            
+            // Update score
+            if (selectedIndex === question.correct) {
+                score++;
+            }
+            
+            updateStats();
+            displayQuestion();
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                displayQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                displayQuestion();
+            }
+        }
+
+        function goToQuestion(index) {
+            currentQuestion = index;
+            displayQuestion();
+        }
+
+        function updateStats() {
+            document.getElementById('currentQuestion').textContent = currentQuestion + 1;
+            document.getElementById('correctAnswers').textContent = score;
+            const percentage = Math.round((score / questions.length) * 100);
+            document.getElementById('score').textContent = percentage + '%';
+        }
+
+        function showResults() {
+            const percentage = Math.round((score / questions.length) * 100);
+            document.getElementById('finalScore').textContent = percentage + '%';
+            
+            let message = '';
+            if (percentage >= 80) {
+                message = 'Excellent! You have mastered the material!';
+            } else if (percentage >= 60) {
+                message = 'Good job! Keep practicing to improve further.';
+            } else if (percentage >= 40) {
+                message = 'Fair performance. Review the topics you missed.';
+            } else {
+                message = 'Keep studying! Review the material and try again.';
+            }
+            
+            document.getElementById('resultMessage').textContent = message;
+            document.querySelector('.quiz-area').style.display = 'none';
+            document.getElementById('resultArea').style.display = 'block';
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            answeredQuestions.clear();
+            userAnswers = {};
+            document.querySelector('.quiz-area').style.display = 'block';
+            document.getElementById('resultArea').style.display = 'none';
+            initializeQuiz();
+        }
+
+        // Initialize the quiz when page loads
+        window.onload = initializeQuiz;
+    </script>
+</body>
+</html>
