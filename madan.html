@@ -2,275 +2,556 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Nepal Pharmacy Council License Exam - MCQ Practice</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --success-color: #27ae60;
+            --error-color: #e74c3c;
+            --warning-color: #f39c12;
+            --background-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --card-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --border-radius: 12px;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--background-gradient);
             min-height: 100vh;
-            padding: 20px;
+            padding: 0;
+            line-height: 1.5;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
         .container {
-            max-width: 900px;
-            margin: 0 auto;
+            max-width: 100%;
+            margin: 0;
             background: white;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            min-height: 100vh;
+            border-radius: 0;
+            box-shadow: none;
             overflow: hidden;
         }
 
+        /* Mobile Header */
         .header {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            background: var(--primary-color);
             color: white;
-            padding: 30px;
+            padding: 16px;
             text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .header h1 {
-            font-size: 2.2em;
-            margin-bottom: 10px;
+            font-size: 1.2em;
+            margin-bottom: 4px;
+            font-weight: 600;
         }
 
         .header p {
-            font-size: 1.1em;
+            font-size: 0.9em;
             opacity: 0.9;
         }
 
+        /* Mobile Stats Bar */
         .stats-bar {
             display: flex;
-            justify-content: space-around;
-            padding: 20px;
+            justify-content: space-between;
+            padding: 12px 16px;
             background: #f8f9fa;
-            border-bottom: 2px solid #e9ecef;
+            border-bottom: 1px solid #e9ecef;
+            font-size: 0.85em;
         }
 
         .stat-item {
             text-align: center;
+            flex: 1;
         }
 
         .stat-number {
-            font-size: 2em;
+            font-size: 1.4em;
             font-weight: bold;
-            color: #2c3e50;
+            color: var(--primary-color);
+            display: block;
         }
 
         .stat-label {
             color: #6c757d;
-            font-size: 0.9em;
+            font-size: 0.75em;
+            margin-top: 2px;
         }
 
-        .quiz-area {
-            padding: 30px;
-        }
-
-        .question-container {
-            margin-bottom: 30px;
-            padding: 25px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            border-left: 5px solid #3498db;
-        }
-
-        .question-number {
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 10px;
-            font-size: 1.1em;
-        }
-
-        .question-text {
-            font-size: 1.2em;
-            margin-bottom: 20px;
-            color: #2c3e50;
-            line-height: 1.5;
-        }
-
-        .options {
-            display: grid;
-            gap: 12px;
-        }
-
-        .option {
-            padding: 15px 20px;
+        /* Progress Bar */
+        .progress-container {
+            padding: 12px 16px;
             background: white;
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1.1em;
-        }
-
-        .option:hover {
-            background: #f1f3f4;
-            border-color: #3498db;
-        }
-
-        .option.selected {
-            background: #3498db;
-            color: white;
-            border-color: #2980b9;
-        }
-
-        .option.correct {
-            background: #27ae60;
-            color: white;
-            border-color: #229954;
-        }
-
-        .option.incorrect {
-            background: #e74c3c;
-            color: white;
-            border-color: #c0392b;
-        }
-
-        .option.disabled {
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
-
-        .controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 30px;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 10px;
-        }
-
-        .btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 6px;
-            font-size: 1em;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
-        }
-
-        .btn-primary {
-            background: #3498db;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #2980b9;
-        }
-
-        .btn-success {
-            background: #27ae60;
-            color: white;
-        }
-
-        .btn-success:hover {
-            background: #229954;
-        }
-
-        .btn-warning {
-            background: #f39c12;
-            color: white;
-        }
-
-        .btn-warning:hover {
-            background: #e67e22;
-        }
-
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
         }
 
         .progress-bar {
             width: 100%;
-            height: 8px;
+            height: 6px;
             background: #e9ecef;
-            border-radius: 4px;
+            border-radius: 3px;
             overflow: hidden;
-            margin: 20px 0;
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #3498db, #2ecc71);
+            background: linear-gradient(90deg, var(--secondary-color), var(--success-color));
             transition: width 0.3s ease;
+            border-radius: 3px;
         }
 
-        .result-area {
+        .progress-text {
             text-align: center;
-            padding: 40px;
-            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            font-size: 0.8em;
+            color: #6c757d;
+            margin-top: 6px;
+        }
+
+        /* Improved Question Navigation */
+        .nav-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background: white;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .nav-info {
+            font-size: 0.9em;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .nav-toggle {
+            background: var(--secondary-color);
             color: white;
-            border-radius: 10px;
-            margin: 20px 0;
-        }
-
-        .result-score {
-            font-size: 3em;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .result-message {
-            font-size: 1.3em;
-            margin-bottom: 20px;
-        }
-
-        .explanation {
-            background: #e8f5e8;
-            border: 1px solid #27ae60;
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 15px;
-            color: #2d5a2d;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-size: 0.8em;
+            cursor: pointer;
         }
 
         .question-nav {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin: 20px 0;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+            gap: 6px;
+            padding: 16px;
+            background: white;
+            border-bottom: 1px solid #e9ecef;
+            max-height: 200px;
+            overflow-y: auto;
+            transition: max-height 0.3s ease;
+        }
+
+        .question-nav.collapsed {
+            max-height: 0;
+            padding: 0 16px;
+            overflow: hidden;
         }
 
         .nav-btn {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border: 2px solid #ddd;
             background: white;
             border-radius: 50%;
             cursor: pointer;
             font-weight: bold;
-            transition: all 0.3s ease;
+            font-size: 0.8em;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
         }
 
         .nav-btn.answered {
-            background: #27ae60;
+            background: var(--success-color);
             color: white;
-            border-color: #27ae60;
+            border-color: var(--success-color);
         }
 
         .nav-btn.current {
-            background: #3498db;
+            background: var(--secondary-color);
             color: white;
-            border-color: #3498db;
+            border-color: var(--secondary-color);
+            transform: scale(1.1);
         }
 
-        @media (max-width: 768px) {
+        /* Quiz Area */
+        .quiz-area {
+            padding: 16px;
+            background: white;
+            min-height: calc(100vh - 280px);
+        }
+
+        .question-container {
+            background: #f8f9fa;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid var(--secondary-color);
+            box-shadow: var(--card-shadow);
+        }
+
+        .question-number {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 12px;
+            font-size: 0.9em;
+        }
+
+        .question-text {
+            font-size: 1em;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        /* Mobile Optimized Options */
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option {
+            padding: 14px 16px;
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.95em;
+            line-height: 1.4;
+            position: relative;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .option:active {
+            transform: scale(0.98);
+        }
+
+        .option:hover {
+            border-color: var(--secondary-color);
+            background: #f0f8ff;
+        }
+
+        .option.selected {
+            border-color: var(--secondary-color);
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .option.correct {
+            border-color: var(--success-color);
+            background: var(--success-color);
+            color: white;
+        }
+
+        .option.incorrect {
+            border-color: var(--error-color);
+            background: var(--error-color);
+            color: white;
+        }
+
+        .option.disabled {
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
+
+        /* Mobile Controls */
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-top: 20px;
+            padding: 16px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            position: sticky;
+            bottom: 0;
+            z-index: 10;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 600;
+            flex: 1;
+            text-align: center;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .btn-primary {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: #2980b9;
+        }
+
+        .btn-success {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .btn-success:hover:not(:disabled) {
+            background: #229954;
+        }
+
+        .btn-warning {
+            background: var(--warning-color);
+            color: white;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Explanation Box */
+        .explanation {
+            background: #e8f5e8;
+            border: 1px solid var(--success-color);
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 16px;
+            color: #2d5a2d;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        /* Jump to Question Modal */
+        .jump-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .jump-modal.show {
+            display: flex;
+        }
+
+        .jump-content {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 24px;
+            max-width: 400px;
+            width: 100%;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .jump-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .jump-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .jump-close {
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .jump-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+        }
+
+        .jump-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1em;
+            transition: all 0.2s ease;
+        }
+
+        .jump-btn.answered {
+            background: var(--success-color);
+            color: white;
+            border-color: var(--success-color);
+        }
+
+        .jump-btn.current {
+            background: var(--secondary-color);
+            color: white;
+            border-color: var(--secondary-color);
+        }
+
+        /* Results Screen */
+        .result-area {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, var(--success-color) 0%, #229954 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .result-score {
+            font-size: 4em;
+            font-weight: bold;
+            margin-bottom: 16px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .result-message {
+            font-size: 1.2em;
+            margin-bottom: 32px;
+            opacity: 0.95;
+            max-width: 300px;
+            line-height: 1.5;
+        }
+
+        .result-details {
+            background: rgba(255,255,255,0.1);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 8px 0;
+            font-size: 1em;
+        }
+
+        /* Mobile First Responsive Design */
+        @media screen and (max-width: 480px) {
+            .header h1 {
+                font-size: 1.1em;
+            }
+            
+            .header p {
+                font-size: 0.8em;
+            }
+            
+            .question-text {
+                font-size: 0.95em;
+            }
+            
+            .option {
+                font-size: 0.9em;
+                padding: 12px 14px;
+            }
+            
+            .btn {
+                font-size: 0.85em;
+                padding: 10px 16px;
+                min-height: 40px;
+            }
+            
+            .stat-number {
+                font-size: 1.2em;
+            }
+            
+            .stat-label {
+                font-size: 0.7em;
+            }
+            
+            .nav-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 0.7em;
+            }
+            
+            .result-score {
+                font-size: 3em;
+            }
+            
+            .result-message {
+                font-size: 1.1em;
+            }
+            
+            .jump-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .jump-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 0.9em;
+            }
+        }
+
+        @media screen and (min-width: 768px) {
+            body {
+                padding: 20px;
+            }
+            
             .container {
-                margin: 10px;
-                border-radius: 10px;
+                max-width: 800px;
+                margin: 0 auto;
+                border-radius: 15px;
+                box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+                min-height: auto;
             }
             
             .header {
-                padding: 20px;
+                border-radius: 15px 15px 0 0;
+                padding: 24px;
             }
             
             .header h1 {
@@ -278,79 +559,170 @@
             }
             
             .quiz-area {
-                padding: 20px;
+                padding: 24px;
+                min-height: auto;
+            }
+            
+            .question-container {
+                padding: 24px;
+            }
+            
+            .question-text {
+                font-size: 1.1em;
+            }
+            
+            .option {
+                font-size: 1em;
+                padding: 16px 20px;
             }
             
             .controls {
-                flex-direction: column;
-                gap: 15px;
+                padding: 20px;
+                position: relative;
+                bottom: auto;
             }
             
-            .stats-bar {
-                flex-direction: column;
-                gap: 15px;
+            .question-nav {
+                grid-template-columns: repeat(10, 1fr);
+                max-height: 120px;
             }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--secondary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Touch Feedback */
+        .option, .btn, .nav-btn, .jump-btn {
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        /* Better scrolling */
+        .question-nav, .jump-content {
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .question-nav::-webkit-scrollbar, .jump-content::-webkit-scrollbar {
+            display: none;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>Nepal Pharmacy Council License Exam</h1>
-            <p>Pharmacy Assistant - MCQ Practice Test</p>
+            <h1>Pharmacy License Exam</h1>
+            <p>Nepal Pharmacy Council - Practice Test</p>
         </div>
 
         <div class="stats-bar">
             <div class="stat-item">
-                <div class="stat-number" id="currentQuestion">1</div>
-                <div class="stat-label">Current Question</div>
+                <span class="stat-number" id="currentQuestion">1</span>
+                <div class="stat-label">Question</div>
             </div>
             <div class="stat-item">
-                <div class="stat-number" id="totalQuestions">100</div>
-                <div class="stat-label">Total Questions</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number" id="correctAnswers">0</div>
+                <span class="stat-number" id="correctAnswers">0</span>
                 <div class="stat-label">Correct</div>
             </div>
             <div class="stat-item">
-                <div class="stat-number" id="score">0%</div>
+                <span class="stat-number" id="score">0%</span>
                 <div class="stat-label">Score</div>
             </div>
         </div>
 
-        <div class="progress-bar">
-            <div class="progress-fill" id="progressFill"></div>
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text" id="progressText">Question 1 of 100</div>
+        </div>
+
+        <!-- Improved Navigation Controls -->
+        <div class="nav-controls">
+            <div class="nav-info">Question Navigation</div>
+            <button class="nav-toggle" onclick="toggleNav()">Toggle Nav</button>
+            <button class="nav-toggle" onclick="showJumpModal()">Jump to Question</button>
         </div>
 
         <div class="question-nav" id="questionNav"></div>
 
-        <div class="quiz-area">
+        <!-- Jump to Question Modal -->
+        <div class="jump-modal" id="jumpModal">
+            <div class="jump-content">
+                <div class="jump-header">
+                    <div class="jump-title">Jump to Question</div>
+                    <button class="jump-close" onclick="hideJumpModal()">&times;</button>
+                </div>
+                <div class="jump-grid" id="jumpGrid"></div>
+            </div>
+        </div>
+
+        <div class="quiz-area" id="quizArea">
             <div class="question-container">
-                <div class="question-number" id="questionNumber">Question 1 of 100</div>
+                <div class="question-number" id="questionNumber">Question 1</div>
                 <div class="question-text" id="questionText"></div>
                 <div class="options" id="optionsContainer"></div>
                 <div class="explanation" id="explanation" style="display: none;"></div>
             </div>
 
             <div class="controls">
-                <button class="btn btn-warning" id="prevBtn" onclick="previousQuestion()">Previous</button>
-                <div>
-                    <button class="btn btn-primary" id="checkBtn" onclick="checkAnswer()">Check Answer</button>
-                    <button class="btn btn-success" id="nextBtn" onclick="nextQuestion()">Next</button>
-                </div>
+                <button class="btn btn-warning" id="prevBtn" onclick="previousQuestion()">
+                    ← Previous
+                </button>
+                <button class="btn btn-primary" id="checkBtn" onclick="checkAnswer()">
+                    Check Answer
+                </button>
+                <button class="btn btn-success" id="nextBtn" onclick="nextQuestion()">
+                    Next →
+                </button>
             </div>
         </div>
 
         <div class="result-area" id="resultArea" style="display: none;">
             <div class="result-score" id="finalScore">0%</div>
             <div class="result-message" id="resultMessage"></div>
-            <button class="btn btn-primary" onclick="restartQuiz()">Restart Quiz</button>
+            
+            <div class="result-details">
+                <div class="result-item">
+                    <span>Total Questions:</span>
+                    <span id="totalQuestionsResult">100</span>
+                </div>
+                <div class="result-item">
+                    <span>Correct Answers:</span>
+                    <span id="correctAnswersResult">0</span>
+                </div>
+                <div class="result-item">
+                    <span>Wrong Answers:</span>
+                    <span id="wrongAnswersResult">0</span>
+                </div>
+                <div class="result-item">
+                    <span>Accuracy:</span>
+                    <span id="accuracyResult">0%</span>
+                </div>
+            </div>
+            
+            <button class="btn btn-primary" onclick="restartQuiz()" style="margin-top: 24px; padding: 16px 32px; font-size: 1.1em;">
+                🔄 Restart Quiz
+            </button>
         </div>
     </div>
 
     <script>
-        // All questions extracted from the provided content
+        // All 100 questions properly extracted
         const questions = [
             {
                 question: "Polio vaccine should be stored at",
@@ -882,7 +1254,7 @@
             },
             {
                 question: "Which of the following antihypertensive drug used in COPD patients",
-                options: ["Amlodipine", "Captopril", "Propranolol", "All"],
+                options: ["Amlodipine", "Captopril", "Propanolol", "All"],
                 correct: 0,
                 explanation: "Amlodipine is safe to use in COPD patients as it doesn't affect respiratory function."
             },
@@ -958,9 +1330,11 @@
         let score = 0;
         let answeredQuestions = new Set();
         let userAnswers = {};
+        let navCollapsed = false;
 
         function initializeQuiz() {
             createNavigation();
+            createJumpGrid();
             displayQuestion();
             updateStats();
         }
@@ -986,10 +1360,49 @@
             }
         }
 
+        function createJumpGrid() {
+            const jumpGrid = document.getElementById('jumpGrid');
+            jumpGrid.innerHTML = '';
+            
+            for (let i = 0; i < questions.length; i++) {
+                const jumpBtn = document.createElement('button');
+                jumpBtn.className = 'jump-btn';
+                jumpBtn.textContent = i + 1;
+                jumpBtn.onclick = () => {
+                    goToQuestion(i);
+                    hideJumpModal();
+                };
+                
+                if (answeredQuestions.has(i)) {
+                    jumpBtn.classList.add('answered');
+                }
+                if (i === currentQuestion) {
+                    jumpBtn.classList.add('current');
+                }
+                
+                jumpGrid.appendChild(jumpBtn);
+            }
+        }
+
+        function toggleNav() {
+            navCollapsed = !navCollapsed;
+            const navContainer = document.getElementById('questionNav');
+            navContainer.classList.toggle('collapsed', navCollapsed);
+        }
+
+        function showJumpModal() {
+            document.getElementById('jumpModal').classList.add('show');
+        }
+
+        function hideJumpModal() {
+            document.getElementById('jumpModal').classList.remove('show');
+        }
+
         function displayQuestion() {
             const question = questions[currentQuestion];
-            document.getElementById('questionNumber').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            document.getElementById('questionNumber').textContent = `Question ${currentQuestion + 1}`;
             document.getElementById('questionText').textContent = question.question;
+            document.getElementById('progressText').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
             
             const optionsContainer = document.getElementById('optionsContainer');
             optionsContainer.innerHTML = '';
@@ -1023,24 +1436,27 @@
             
             // Update navigation
             createNavigation();
+            createJumpGrid();
             
             // Update button states
-            document.getElementById('prevBtn').disabled = currentQuestion === 0;
-            document.getElementById('nextBtn').textContent = currentQuestion === questions.length - 1 ? 'Finish' : 'Next';
+            document.getElementById('prevBtn').style.display = currentQuestion === 0 ? 'none' : 'flex';
+            document.getElementById('nextBtn').textContent = currentQuestion === questions.length - 1 ? 'Finish' : 'Next →';
             
             // Update check button
             const checkBtn = document.getElementById('checkBtn');
             if (userAnswers[currentQuestion] !== undefined) {
-                checkBtn.textContent = 'Answered';
-                checkBtn.disabled = true;
+                checkBtn.style.display = 'none';
             } else {
-                checkBtn.textContent = 'Check Answer';
+                checkBtn.style.display = 'flex';
                 checkBtn.disabled = false;
             }
             
             // Update progress
             const progress = ((currentQuestion + 1) / questions.length) * 100;
             document.getElementById('progressFill').style.width = progress + '%';
+            
+            // Smooth scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function selectOption(index) {
@@ -1054,7 +1470,21 @@
         function checkAnswer() {
             const selectedOption = document.querySelector('.option.selected');
             if (!selectedOption) {
-                alert('Please select an answer!');
+                // Vibrate for mobile feedback
+                if (navigator.vibrate) {
+                    navigator.vibrate(200);
+                }
+                
+                // Show gentle alert
+                const checkBtn = document.getElementById('checkBtn');
+                const originalText = checkBtn.textContent;
+                checkBtn.textContent = 'Select an answer!';
+                checkBtn.style.background = '#e74c3c';
+                
+                setTimeout(() => {
+                    checkBtn.textContent = originalText;
+                    checkBtn.style.background = '';
+                }, 1500);
                 return;
             }
             
@@ -1082,10 +1512,27 @@
             // Update score
             if (selectedIndex === question.correct) {
                 score++;
+                // Success vibration
+                if (navigator.vibrate) {
+                    navigator.vibrate([100, 50, 100]);
+                }
+            } else {
+                // Error vibration
+                if (navigator.vibrate) {
+                    navigator.vibrate(300);
+                }
             }
             
             updateStats();
-            displayQuestion();
+            
+            // Auto-advance to next question after a delay
+            setTimeout(() => {
+                if (currentQuestion < questions.length - 1) {
+                    nextQuestion();
+                } else {
+                    showResults();
+                }
+            }, 2000);
         }
 
         function nextQuestion() {
@@ -1118,22 +1565,33 @@
 
         function showResults() {
             const percentage = Math.round((score / questions.length) * 100);
+            const wrongAnswers = questions.length - score;
+            
             document.getElementById('finalScore').textContent = percentage + '%';
+            document.getElementById('totalQuestionsResult').textContent = questions.length;
+            document.getElementById('correctAnswersResult').textContent = score;
+            document.getElementById('wrongAnswersResult').textContent = wrongAnswers;
+            document.getElementById('accuracyResult').textContent = percentage + '%';
             
             let message = '';
             if (percentage >= 80) {
-                message = 'Excellent! You have mastered the material!';
+                message = '🎉 Excellent! You have mastered the material!';
             } else if (percentage >= 60) {
-                message = 'Good job! Keep practicing to improve further.';
+                message = '👍 Good job! Keep practicing to improve further.';
             } else if (percentage >= 40) {
-                message = 'Fair performance. Review the topics you missed.';
+                message = '📚 Fair performance. Review the topics you missed.';
             } else {
-                message = 'Keep studying! Review the material and try again.';
+                message = '💪 Keep studying! Review the material and try again.';
             }
             
             document.getElementById('resultMessage').textContent = message;
-            document.querySelector('.quiz-area').style.display = 'none';
-            document.getElementById('resultArea').style.display = 'block';
+            document.getElementById('quizArea').style.display = 'none';
+            document.getElementById('resultArea').style.display = 'flex';
+            
+            // Success vibration for completion
+            if (navigator.vibrate) {
+                navigator.vibrate([200, 100, 200, 100, 400]);
+            }
         }
 
         function restartQuiz() {
@@ -1141,10 +1599,34 @@
             score = 0;
             answeredQuestions.clear();
             userAnswers = {};
-            document.querySelector('.quiz-area').style.display = 'block';
+            document.getElementById('quizArea').style.display = 'block';
             document.getElementById('resultArea').style.display = 'none';
             initializeQuiz();
         }
+
+        // Prevent zoom on double tap
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+
+        // Handle back button on mobile
+        window.addEventListener('popstate', function (e) {
+            if (document.getElementById('jumpModal').classList.contains('show')) {
+                hideJumpModal();
+            }
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('jumpModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideJumpModal();
+            }
+        });
 
         // Initialize the quiz when page loads
         window.onload = initializeQuiz;
