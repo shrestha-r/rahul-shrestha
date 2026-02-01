@@ -63,6 +63,14 @@ const PROJECTS = [
     type: ["fullstack"],
     repo: "madan.html",
     demo: "#top"
+  },
+  {
+    title: "Linux curl Command Guide",
+    description: "Comprehensive tutorial explaining the curl command in Linux with practical examples and best practices.",
+    tags: ["Linux", "CLI", "Tutorial"],
+    type: ["fullstack"],
+    repo: "curl-guide.html",
+    demo: "curl-guide.html"
   }
 ];
 

@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding the curl Command in Linux | Rahul Shrestha</title>
+    <meta name="description" content="A comprehensive guide to the curl command in Linux - learn syntax, options, and practical examples.">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --text-color: #1f2937;
+            --text-light: #6b7280;
+            --background: #ffffff;
+            --code-bg: #f3f4f6;
+            --border-color: #e5e7eb;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--background);
+        }
+
+        .header {
+            background: var(--primary-color);
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .back-link {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border: 1px solid white;
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .intro {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .intro h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .intro p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section h2 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .section h3 {
+            color: var(--secondary-color);
+            font-size: 1.4rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .section p {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+            font-size: 1.05rem;
+        }
+
+        code {
+            background: var(--code-bg);
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+            color: var(--secondary-color);
+        }
+
+        .code-block {
+            background: var(--code-bg);
+            border-left: 4px solid var(--primary-color);
+            padding: 1rem 1.5rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        .code-block code {
+            background: transparent;
+            padding: 0;
+            display: block;
+            white-space: pre;
+        }
+
+        .example {
+            background: #f0f9ff;
+            border-left: 4px solid var(--success-color);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .example-title {
+            font-weight: 600;
+            color: var(--success-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .note {
+            background: #fffbeb;
+            border-left: 4px solid var(--warning-color);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .note-title {
+            font-weight: 600;
+            color: var(--warning-color);
+            margin-bottom: 0.5rem;
+        }
+
+        ul, ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        table th {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.75rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        table tr:hover {
+            background: var(--code-bg);
+        }
+
+        .toc {
+            background: var(--code-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .toc h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .toc ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .toc a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .toc a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+        footer {
+            background: var(--text-color);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .intro h2 {
+                font-size: 1.5rem;
+            }
+
+            .section h2 {
+                font-size: 1.5rem;
+            }
+
+            .section h3 {
+                font-size: 1.2rem;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1>📘 Understanding the curl Command in Linux</h1>
+            <a href="index.html" class="back-link">← Back to Portfolio</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="intro">
+            <h2>What is curl?</h2>
+            <p>
+                <strong>curl</strong> (Client URL) is a powerful command-line tool used to transfer data to or from a server using various protocols including HTTP, HTTPS, FTP, and many others. 
+                It's one of the most essential tools for developers, system administrators, and anyone working with APIs or web services.
+            </p>
+            <p>
+                Whether you're testing REST APIs, downloading files, debugging web applications, or automating data transfers, curl is your go-to tool for making network requests from the terminal.
+            </p>
+        </div>
+
+        <div class="toc">
+            <h3>📋 Table of Contents</h3>
+            <ul>
+                <li><a href="#installation">1. Installation</a></li>
+                <li><a href="#basic-syntax">2. Basic Syntax</a></li>
+                <li><a href="#common-options">3. Common Options and Flags</a></li>
+                <li><a href="#http-methods">4. HTTP Methods</a></li>
+                <li><a href="#practical-examples">5. Practical Examples</a></li>
+                <li><a href="#advanced-usage">6. Advanced Usage</a></li>
+                <li><a href="#best-practices">7. Best Practices</a></li>
+            </ul>
+        </div>
+
+        <section id="installation" class="section">
+            <h2>1. Installation</h2>
+            <p>curl is pre-installed on most Linux distributions and macOS. To check if it's installed:</p>
+            <div class="code-block">
+<code>curl --version</code>
+            </div>
+            
+            <h3>Installing on Different Systems:</h3>
+            
+            <div class="code-block">
+<code># Ubuntu/Debian
+sudo apt update
+sudo apt install curl
+
+# CentOS/RHEL/Fedora
+sudo yum install curl
+# or
+sudo dnf install curl
+
+# macOS (if not already installed)
+brew install curl
+
+# Arch Linux
+sudo pacman -S curl</code>
+            </div>
+        </section>
+
+        <section id="basic-syntax" class="section">
+            <h2>2. Basic Syntax</h2>
+            <p>The basic syntax of curl is straightforward:</p>
+            <div class="code-block">
+<code>curl [options] [URL]</code>
+            </div>
+
+            <h3>Simplest Example:</h3>
+            <div class="example">
+                <div class="example-title">Example: Fetch a Web Page</div>
+                <div class="code-block">
+<code>curl https://example.com</code>
+                </div>
+                <p>This command fetches the HTML content of example.com and displays it in your terminal.</p>
+            </div>
+        </section>
+
+        <section id="common-options" class="section">
+            <h2>3. Common Options and Flags</h2>
+            <p>curl has numerous options. Here are the most commonly used ones:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Option</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>-o, --output</code></td>
+                        <td>Write output to a file instead of stdout</td>
+                    </tr>
+                    <tr>
+                        <td><code>-O, --remote-name</code></td>
+                        <td>Save with the remote file name</td>
+                    </tr>
+                    <tr>
+                        <td><code>-L, --location</code></td>
+                        <td>Follow redirects</td>
+                    </tr>
+                    <tr>
+                        <td><code>-i, --include</code></td>
+                        <td>Include response headers in output</td>
+                    </tr>
+                    <tr>
+                        <td><code>-I, --head</code></td>
+                        <td>Fetch headers only (HEAD request)</td>
+                    </tr>
+                    <tr>
+                        <td><code>-X, --request</code></td>
+                        <td>Specify HTTP method (GET, POST, PUT, DELETE, etc.)</td>
+                    </tr>
+                    <tr>
+                        <td><code>-H, --header</code></td>
+                        <td>Add custom header to request</td>
+                    </tr>
+                    <tr>
+                        <td><code>-d, --data</code></td>
+                        <td>Send data in POST request</td>
+                    </tr>
+                    <tr>
+                        <td><code>-u, --user</code></td>
+                        <td>Server user and password (user:password)</td>
+                    </tr>
+                    <tr>
+                        <td><code>-v, --verbose</code></td>
+                        <td>Make the operation more verbose</td>
+                    </tr>
+                    <tr>
+                        <td><code>-s, --silent</code></td>
+                        <td>Silent mode (no progress bar)</td>
+                    </tr>
+                    <tr>
+                        <td><code>-k, --insecure</code></td>
+                        <td>Allow insecure SSL connections</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="http-methods" class="section">
+            <h2>4. HTTP Methods</h2>
+            <p>curl supports all standard HTTP methods. Here's how to use them:</p>
+
+            <h3>GET Request (Default)</h3>
+            <div class="code-block">
+<code>curl https://api.example.com/users</code>
+            </div>
+
+            <h3>POST Request</h3>
+            <div class="code-block">
+<code>curl -X POST https://api.example.com/users \
+  -H "Content-Type: application/json" \
+  -d '{"name": "John Doe", "email": "john@example.com"}'</code>
+            </div>
+
+            <h3>PUT Request</h3>
+            <div class="code-block">
+<code>curl -X PUT https://api.example.com/users/123 \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Jane Doe"}'</code>
+            </div>
+
+            <h3>DELETE Request</h3>
+            <div class="code-block">
+<code>curl -X DELETE https://api.example.com/users/123</code>
+            </div>
+
+            <h3>PATCH Request</h3>
+            <div class="code-block">
+<code>curl -X PATCH https://api.example.com/users/123 \
+  -H "Content-Type: application/json" \
+  -d '{"status": "active"}'</code>
+            </div>
+        </section>
+
+        <section id="practical-examples" class="section">
+            <h2>5. Practical Examples</h2>
+
+            <h3>Download a File</h3>
+            <div class="example">
+                <div class="example-title">Save with custom name:</div>
+                <div class="code-block">
+<code>curl -o myfile.zip https://example.com/file.zip</code>
+                </div>
+            </div>
+
+            <div class="example">
+                <div class="example-title">Save with original filename:</div>
+                <div class="code-block">
+<code>curl -O https://example.com/file.zip</code>
+                </div>
+            </div>
+
+            <h3>Follow Redirects</h3>
+            <div class="example">
+                <div class="example-title">Many URLs redirect. Use -L to follow them:</div>
+                <div class="code-block">
+<code>curl -L https://github.com</code>
+                </div>
+            </div>
+
+            <h3>Send Headers</h3>
+            <div class="example">
+                <div class="example-title">Add authentication token:</div>
+                <div class="code-block">
+<code>curl -H "Authorization: Bearer YOUR_TOKEN" \
+  https://api.example.com/protected</code>
+                </div>
+            </div>
+
+            <h3>POST JSON Data</h3>
+            <div class="example">
+                <div class="example-title">Send JSON to an API:</div>
+                <div class="code-block">
+<code>curl -X POST https://api.example.com/data \
+  -H "Content-Type: application/json" \
+  -d '{
+    "username": "testuser",
+    "password": "testpass",
+    "email": "test@example.com"
+  }'</code>
+                </div>
+            </div>
+
+            <h3>Upload a File</h3>
+            <div class="example">
+                <div class="example-title">Upload using multipart/form-data:</div>
+                <div class="code-block">
+<code>curl -X POST https://api.example.com/upload \
+  -F "file=@/path/to/file.pdf" \
+  -F "description=My Document"</code>
+                </div>
+            </div>
+
+            <h3>Basic Authentication</h3>
+            <div class="example">
+                <div class="example-title">Authenticate with username and password:</div>
+                <div class="code-block">
+<code>curl -u username:password https://api.example.com/protected</code>
+                </div>
+            </div>
+
+            <h3>View Response Headers</h3>
+            <div class="example">
+                <div class="example-title">See full response including headers:</div>
+                <div class="code-block">
+<code>curl -i https://api.example.com/users</code>
+                </div>
+            </div>
+
+            <div class="example">
+                <div class="example-title">Headers only (no body):</div>
+                <div class="code-block">
+<code>curl -I https://api.example.com/users</code>
+                </div>
+            </div>
+
+            <h3>Test API Performance</h3>
+            <div class="example">
+                <div class="example-title">Measure response time:</div>
+                <div class="code-block">
+<code>curl -w "\nTime Total: %{time_total}s\n" \
+  -o /dev/null -s https://api.example.com</code>
+                </div>
+            </div>
+
+            <h3>Download Multiple Files</h3>
+            <div class="example">
+                <div class="example-title">Download files with pattern:</div>
+                <div class="code-block">
+<code># Download file1.txt through file5.txt
+curl -O https://example.com/file[1-5].txt
+
+# Download files with different names
+curl -O https://example.com/{file1,file2,file3}.txt</code>
+                </div>
+            </div>
+        </section>
+
+        <section id="advanced-usage" class="section">
+            <h2>6. Advanced Usage</h2>
+
+            <h3>Save Cookies</h3>
+            <div class="code-block">
+<code>curl -c cookies.txt https://example.com/login</code>
+            </div>
+
+            <h3>Use Saved Cookies</h3>
+            <div class="code-block">
+<code>curl -b cookies.txt https://example.com/dashboard</code>
+            </div>
+
+            <h3>Set User Agent</h3>
+            <div class="code-block">
+<code>curl -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64)" \
+  https://example.com</code>
+            </div>
+
+            <h3>Limit Download Speed</h3>
+            <div class="code-block">
+<code>curl --limit-rate 100K -O https://example.com/largefile.zip</code>
+            </div>
+
+            <h3>Resume Interrupted Download</h3>
+            <div class="code-block">
+<code>curl -C - -O https://example.com/largefile.zip</code>
+            </div>
+
+            <h3>Use Proxy</h3>
+            <div class="code-block">
+<code>curl -x http://proxy.example.com:8080 https://api.example.com</code>
+            </div>
+
+            <h3>Verbose Mode for Debugging</h3>
+            <div class="code-block">
+<code>curl -v https://api.example.com/users</code>
+            </div>
+            <p>This shows detailed request/response information including headers, SSL handshake, etc.</p>
+
+            <h3>Save Response to File with Progress</h3>
+            <div class="code-block">
+<code>curl -# -o output.html https://example.com</code>
+            </div>
+
+            <h3>Timeout Settings</h3>
+            <div class="code-block">
+<code># Connection timeout (10 seconds)
+curl --connect-timeout 10 https://api.example.com
+
+# Maximum time for operation (30 seconds)
+curl --max-time 30 https://api.example.com</code>
+            </div>
+        </section>
+
+        <section id="best-practices" class="section">
+            <h2>7. Best Practices</h2>
+
+            <div class="note">
+                <div class="note-title">💡 Security Tip</div>
+                <p>
+                    Avoid using <code>-k</code> (--insecure) in production environments as it disables SSL certificate verification, 
+                    making your connection vulnerable to man-in-the-middle attacks.
+                </p>
+            </div>
+
+            <h3>1. Use HTTPS When Possible</h3>
+            <p>Always prefer HTTPS over HTTP for secure data transmission:</p>
+            <div class="code-block">
+<code># Good
+curl https://api.example.com
+
+# Avoid (unless necessary)
+curl http://api.example.com</code>
+            </div>
+
+            <h3>2. Handle Errors Properly</h3>
+            <p>Use <code>--fail</code> to ensure curl returns non-zero exit code on HTTP errors:</p>
+            <div class="code-block">
+<code>curl --fail https://api.example.com/resource || echo "Request failed"</code>
+            </div>
+
+            <h3>3. Store Credentials Securely</h3>
+            <p>Don't hardcode passwords in scripts. Use environment variables:</p>
+            <div class="code-block">
+<code># Bad
+curl -u user:password123 https://api.example.com
+
+# Good
+curl -u $API_USER:$API_PASSWORD https://api.example.com</code>
+            </div>
+
+            <h3>4. Use Configuration Files</h3>
+            <p>For complex requests, create a config file:</p>
+            <div class="code-block">
+<code># Create ~/.curlrc
+user-agent = "MyApp/1.0"
+header = "Accept: application/json"
+
+# Use it
+curl https://api.example.com</code>
+            </div>
+
+            <h3>5. Combine with Other Tools</h3>
+            <p>curl works great with jq for JSON processing:</p>
+            <div class="code-block">
+<code># Pretty print JSON response
+curl -s https://api.example.com/users | jq '.'
+
+# Extract specific field
+curl -s https://api.example.com/users | jq '.[] | .name'</code>
+            </div>
+
+            <h3>6. Test Before Scripting</h3>
+            <p>Always test curl commands manually before adding them to scripts:</p>
+            <div class="code-block">
+<code># Test with verbose mode first
+curl -v https://api.example.com/endpoint
+
+# Once confirmed working, use in script
+#!/bin/bash
+response=$(curl -s https://api.example.com/endpoint)
+echo "$response"</code>
+            </div>
+
+            <div class="note">
+                <div class="note-title">📚 Additional Resources</div>
+                <ul>
+                    <li>Official curl documentation: <code>man curl</code> or visit <a href="https://curl.se/docs/" target="_blank">curl.se/docs</a></li>
+                    <li>List all options: <code>curl --help</code></li>
+                    <li>Verbose help with examples: <code>curl --manual</code></li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Summary</h2>
+            <p>
+                The curl command is an indispensable tool for anyone working with web technologies, APIs, or network services. 
+                Its versatility allows you to perform simple file downloads to complex API interactions with custom headers, 
+                authentication, and data payloads.
+            </p>
+            <p>
+                Key takeaways:
+            </p>
+            <ul>
+                <li>curl is a command-line tool for transferring data using various protocols</li>
+                <li>It supports all HTTP methods (GET, POST, PUT, DELETE, PATCH, etc.)</li>
+                <li>You can customize requests with headers, authentication, and data</li>
+                <li>It's perfect for testing APIs, downloading files, and automating web tasks</li>
+                <li>Always follow security best practices when handling credentials</li>
+            </ul>
+            <p>
+                Start with simple commands and gradually explore advanced features as you become more comfortable. 
+                The more you use curl, the more you'll appreciate its power and flexibility!
+            </p>
+        </section>
+    </div>
+
+    <footer>
+        <p>Created by <strong>Rahul Shrestha</strong> | <a href="index.html" style="color: white; text-decoration: underline;">Back to Portfolio</a></p>
+        <p style="margin-top: 0.5rem; opacity: 0.8;">© 2026 - Built with ❤️ for learning and sharing knowledge</p>
+    </footer>
+</body>
+</html>
