@@ -1,6 +1,6 @@
 // ====== UPDATE THESE LINKS ======
 const LINKS = {
-  cv: "https://colab.research.google.com/drive/1Ub4eCtg-61_3D9JeaygXwsyL7cJ98DCk?usp=drive_link",
+  cv: "pdf/Rahul_Shrestha_CV.pdf.pdf",
   github: "https://github.com/shrestha-r/",
   linkedin: "https://www.linkedin.com/in/rahulshrestha61/",
   email: "mailto:rahulshrestha8102@gmail.com"
@@ -13,57 +13,57 @@ const PROJECTS = [
     description: "Full-stack PHP + MySQL app with relational schema, dynamic pages, validation and authentication patterns.",
     tags: ["PHP", "MySQL", "JavaScript", "Full-Stack"],
     type: ["fullstack", "database"],
-    repo: "https://github.com/your-username/project1",
-    demo: "#"
+    repo: "https://github.com/shrestha-r/Poppleton-Dog-Show",
+    demo: "https://github.com/shrestha-r/Poppleton-Dog-Show"
   },
-  {
-    title: "Lost & Found Tracker (Java)",
-    description: "Console application with role-based workflow, validation, and structured menu navigation using OOP.",
-    tags: ["Java", "OOP", "Console App"],
-    type: ["java"],
-    repo: "https://github.com/your-username/project2",
-    demo: "#"
-  },
+  // {
+  //   title: "Lost & Found Tracker (Java)",
+  //   description: "Console application with role-based workflow, validation, and structured menu navigation using OOP.",
+  //   tags: ["Java", "OOP", "Console App"],
+  //   type: ["java"],
+  //   repo: "https://github.com/your-username/project2",
+  //   demo: "#"
+  // },
   {
     title: "Stock Price Prediction (Python)",
     description: "Regression models (Linear Regression vs Random Forest) with evaluation (MAE/RMSE/R²) and critical discussion.",
     tags: ["Python", "ML", "Regression"],
     type: ["ml"],
-    repo: "https://github.com/your-username/project3",
-    demo: "#"
+    repo: "https://github.com/shrestha-r/Year2/tree/main/Machine%20Learning/U2550807_Assignment2/Assignment2",
+    demo: "https://colab.research.google.com/drive/1Ub4eCtg-61_3D9JeaygXwsyL7cJ98DCk?usp=drive_link"
   },
   {
     title: "DSA Practice (Trees / Hash)",
     description: "Implementations and notes on data structures, edge cases, and time/space complexity reasoning.",
     tags: ["Java", "DSA", "Complexity"],
     type: ["java"],
-    repo: "https://github.com/your-username/project4",
-    demo: "#"
+    repo: "https://github.com/shrestha-r/Year2/tree/main/Data%20Structure/DataStructues",
+    demo: "https://github.com/shrestha-r/Year2/tree/main/Data%20Structure/DataStructues"
   },
   {
     title: "SQL Query Pack",
     description: "A collection of join/aggregation queries with explanations, focusing on correctness and readability.",
     tags: ["SQL", "MySQL", "Joins"],
     type: ["database"],
-    repo: "https://github.com/your-username/project5",
-    demo: "#"
+    repo: "https://github.com/shrestha-r/Poppleton-Dog-Show",
+    demo: "https://github.com/shrestha-r/Poppleton-Dog-Show"
   },
   {
     title: "Portfolio Website",
     description: "This website: responsive layout, filtering, and contact form behavior with clean UI.",
     tags: ["HTML", "CSS", "JavaScript"],
     type: ["fullstack"],
-    repo: "https://github.com/your-username/portfolio",
-    demo: "#,top"
+    repo: "https://github.com/shrestha-r/rahul-shrestha",
+    demo: "https://rahul-shrestha.com.np"
   },
-    {
-    title: "Madan Shrestha",
-    description: "MCQ practice for Pharmacy questions",
-    tags: ["HTML", "CSS", "JavaScript"],
-    type: ["fullstack"],
-    repo: "madan.html",
-    demo: "#top"
-  }
+  //   {
+  //   title: "Madan Shrestha",
+  //   description: "MCQ practice for Pharmacy questions",
+  //   tags: ["HTML", "CSS", "JavaScript"],
+  //   type: ["fullstack"],
+  //   repo: "madan.html",
+  //   demo: "#top"
+  // }
 ];
 
 // ===== Mobile Drawer Navigation =====
@@ -283,3 +283,11 @@ cvBtn.addEventListener("click", e => {
 });
 
 cvDownload.href = CV_FILE;
+
+
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/sw.js");
+  });
+}
