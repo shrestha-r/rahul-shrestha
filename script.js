@@ -1,6 +1,6 @@
 // ====== UPDATE THESE LINKS ======
 const LINKS = {
-  cv: "pdf/Rahul_Shrestha_CV.pdf.pdf",
+  cv: "pdf/Rahul_Shrestha_CV.pdf",
   github: "https://github.com/shrestha-r/",
   linkedin: "https://www.linkedin.com/in/rahulshrestha61/",
   email: "mailto:rahulshrestha8102@gmail.com"

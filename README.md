@@ -1,21 +1,28 @@
-# 🌐 Portfolio Website – Rahul Shrestha
+# Rahul Shrestha – Portfolio Website 🌐
 
-A personal portfolio website built using **HTML, CSS, and JavaScript** to showcase my projects, technical skills, and placement availability. Designed to be lightweight, responsive, and easy to navigate—perfect for recruiters and hiring managers.
+This is my personal portfolio website showcasing my skills, projects, and experience as a **BSc Computer Science (AI)** student and **Backend Developer** seeking a **2025 placement**.
+
+🔗 **Live Website:** https://rahul-shrestha.com.np
 
 ---
 
-## 🚀 Live Demo
+## ✨ Features
 
-👉 **Portfolio:** [https://your-username.github.io/portfolio](https://your-username.github.io/portfolio)  
-*(Update this link once deployed to GitHub Pages)*
+- Responsive and modern UI
+- Projects showcase with descriptions
+- Skills and technology stack overview
+- Contact section for recruiters and collaborators
+- Optimised for performance and accessibility
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **HTML5** – Semantic markup and accessibility-friendly structure
-- **CSS3** – Responsive layout, modern UI, and animations
-- **JavaScript (Vanilla)** – Dynamic content rendering, filtering, and interactivity
-- **No frameworks or build tools required** – Pure vanilla JavaScript for simplicity and performance
+- **Frontend:** HTML, CSS, JavaScript  
+- **Hosting:** GitHub Pages / Custom Domain  
+- **Version Control:** Git & GitHub  
 
----
+*(Added)*  
+- Progressive Web App (PWA) support  
+- Google Analytics integration  
+- GitHub API project dashboard  
