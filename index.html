@@ -1,449 +1,890 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Rahul Shrestha | Portfolio</title>
-  <meta name="description"
-    content="Rahul Shrestha — CS with AI student seeking placement. Full-stack, databases, Java/Python/SQL." />
-  <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#111111">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rahul Shrestha — Aspiring Software Engineer</title>
+<meta name="description" content="Rahul Shrestha — Computer Science student building backend systems, databases and full-stack applications. Seeking a Software Engineering placement.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F3F5FA;
+    --bg-alt:#EAEDF6;
+    --surface:#FFFFFF;
+    --ink:#101728;
+    --ink-muted:#5B6478;
+    --line:#DBE1EE;
+    --accent:#2A52F5;
+    --accent-ink:#1B3BC0;
+    --amber:#DE8A1E;
+    --tag-bg:#EEF1FB;
+    --success:#1A8F5C;
+    --radius:14px;
+    --maxw:1120px;
+    --shadow: 0 1px 2px rgba(16,23,40,.04), 0 12px 32px -16px rgba(16,23,40,.14);
+  }
+  [data-theme="dark"]{
+    --bg:#0A0E18;
+    --bg-alt:#0E1424;
+    --surface:#131A2C;
+    --ink:#ECEFF7;
+    --ink-muted:#8B93AC;
+    --line:#232C42;
+    --accent:#6E8CFF;
+    --accent-ink:#A9BBFF;
+    --amber:#F0B24E;
+    --tag-bg:#1A2238;
+    --success:#4ADE9A;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 20px 44px -20px rgba(0,0,0,.6);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    transition:background .35s ease, color .35s ease;
+    overflow-x:hidden;
+  }
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:56px 56px;
+    opacity:.35;
+    pointer-events:none;
+    z-index:0;
+    mask-image:radial-gradient(ellipse 80% 55% at 50% 0%, black 10%, transparent 75%);
+  }
+  ::selection{background:var(--accent); color:#fff;}
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px; position:relative; z-index:1;}
+  h1,h2,h3,h4{font-family:'Fraunces',serif; font-weight:600; letter-spacing:-0.01em;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.78rem;
+    color:var(--accent);
+    letter-spacing:.02em;
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:14px;
+  }
+  .eyebrow::before{content:"--"; opacity:.6;}
+  .eyebrow .num{color:var(--ink-muted);}
 
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" type="image/png" href="images/favicon.png">
+  /* ===== Nav ===== */
+  header{
+    position:sticky; top:0; z-index:50;
+    backdrop-filter:blur(10px);
+    background:color-mix(in srgb, var(--bg) 82%, transparent);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    max-width:var(--maxw); margin:0 auto; padding:16px 28px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .logo{
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:600; font-size:1rem;
+    border:1.5px solid var(--ink); border-radius:8px;
+    width:38px; height:38px; display:flex; align-items:center; justify-content:center;
+  }
+  .logo span{color:var(--accent);}
+  .nav-links{display:flex; gap:2px; align-items:center; list-style:none;}
+  .nav-links a{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.82rem; color:var(--ink-muted);
+    padding:8px 14px; border-radius:8px;
+    transition:.2s;
+  }
+  .nav-links a:hover{color:var(--ink); background:var(--bg-alt);}
+  .nav-right{display:flex; align-items:center; gap:10px;}
+  .theme-btn{
+    width:38px; height:38px; border-radius:8px; border:1px solid var(--line);
+    background:var(--surface); color:var(--ink); cursor:pointer;
+    display:flex; align-items:center; justify-content:center; font-size:1rem;
+    transition:.2s;
+  }
+  .theme-btn:hover{border-color:var(--accent);}
+  .menu-btn{display:none; background:none; border:1px solid var(--line); border-radius:8px; width:38px; height:38px; color:var(--ink); cursor:pointer; font-size:1.1rem;}
 
+  /* ===== Buttons ===== */
+  .btn{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.82rem;
+    padding:12px 20px; border-radius:9px;
+    display:inline-flex; align-items:center; gap:8px;
+    cursor:pointer; border:1.5px solid transparent;
+    transition:.2s;
+  }
+  .btn-primary{background:var(--accent); color:#fff;}
+  .btn-primary:hover{background:var(--accent-ink); transform:translateY(-1px);}
+  .btn-ghost{border-color:var(--line); color:var(--ink); background:var(--surface);}
+  .btn-ghost:hover{border-color:var(--accent); color:var(--accent);}
+
+  /* ===== Hero ===== */
+  .hero{padding:88px 0 70px; position:relative;}
+  .hero-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:56px; align-items:center;}
+  .kicker{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'IBM Plex Mono',monospace; font-size:.76rem;
+    color:var(--success); background:var(--tag-bg);
+    border:1px solid var(--line); padding:6px 12px; border-radius:99px;
+    margin-bottom:22px;
+  }
+  .kicker .dot{width:7px; height:7px; border-radius:50%; background:var(--success); animation:pulse 1.8s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+  .hero h1{font-size:clamp(2.3rem, 5vw, 3.6rem); line-height:1.05; margin-bottom:16px;}
+  .hero h1 em{font-style:normal; color:var(--accent);}
+  .hero p.lead{font-size:1.08rem; color:var(--ink-muted); max-width:52ch; margin-bottom:30px;}
+  .hero-ctas{display:flex; gap:12px; flex-wrap:wrap; margin-bottom:38px;}
+  .focus-tags{display:flex; flex-wrap:wrap; gap:9px;}
+  .tag{
+    font-family:'IBM Plex Mono',monospace; font-size:.74rem;
+    background:var(--tag-bg); border:1px solid var(--line);
+    padding:6px 11px; border-radius:7px; color:var(--ink-muted);
+  }
+
+  /* terminal card */
+  .terminal{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    box-shadow:var(--shadow); overflow:hidden;
+  }
+  .term-bar{
+    display:flex; align-items:center; gap:8px; padding:11px 14px;
+    border-bottom:1px solid var(--line); background:var(--bg-alt);
+  }
+  .term-dot{width:10px; height:10px; border-radius:50%;}
+  .term-body{padding:22px 20px; font-family:'IBM Plex Mono',monospace; font-size:.86rem;}
+  .term-body .comment{color:var(--ink-muted);}
+  .term-body .kw{color:var(--accent);}
+  .term-body .str{color:var(--amber);}
+  .term-body .field{color:var(--success);}
+  .cursor{display:inline-block; width:7px; height:14px; background:var(--accent); vertical-align:middle; animation:blink 1s step-end infinite;}
+  @keyframes blink{50%{opacity:0;}}
+  .term-row{margin:5px 0;}
+
+  .stat-row{display:flex; gap:0; margin-top:26px; border-top:1px solid var(--line); padding-top:22px;}
+  .stat{flex:1; padding-right:14px;}
+  .stat b{font-family:'Fraunces',serif; font-size:1.7rem; display:block; color:var(--accent);}
+  .stat span{font-size:.76rem; color:var(--ink-muted); font-family:'IBM Plex Mono',monospace;}
+
+  .id-card{
+    display:flex; align-items:center; gap:14px;
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:14px 16px; margin-bottom:16px; box-shadow:var(--shadow);
+  }
+  .photo-frame{
+    width:56px; height:56px; border-radius:12px; overflow:hidden; flex-shrink:0;
+    border:1.5px solid var(--line); background:var(--bg-alt);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .photo-frame img{width:100%; height:100%; object-fit:cover; display:block;}
+  .photo-fallback{
+    display:none; width:100%; height:100%; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:.82rem; color:var(--ink-muted);
+  }
+  .id-name{font-weight:600; font-size:.95rem;}
+  .id-meta{font-family:'IBM Plex Mono',monospace; font-size:.74rem; color:var(--ink-muted); margin-top:2px;}
+
+  /* ===== Sections generic ===== */
+  section{padding:86px 0; border-top:1px solid var(--line); position:relative;}
+  .section-head{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:46px; gap:24px; flex-wrap:wrap;}
+  .section-head h2{font-size:clamp(1.7rem,3vw,2.3rem);}
+  .section-head p{color:var(--ink-muted); max-width:46ch;}
+
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* about */
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start;}
+  .about-grid p{color:var(--ink-muted); margin-bottom:16px;}
+  .interest-list{list-style:none; margin-top:22px; display:grid; gap:10px;}
+  .interest-list li{display:flex; gap:10px; align-items:baseline; font-size:.94rem;}
+  .interest-list li::before{content:"▹"; color:var(--accent); font-family:'IBM Plex Mono',monospace;}
+  .origin{display:flex; gap:22px; margin-bottom:26px; flex-wrap:wrap;}
+  .origin div{font-family:'IBM Plex Mono',monospace; font-size:.8rem; color:var(--ink-muted); border:1px solid var(--line); padding:8px 12px; border-radius:8px;}
+
+  /* timeline (about) */
+  .timeline{position:relative; padding-left:26px;}
+  .timeline::before{content:""; position:absolute; left:6px; top:6px; bottom:6px; width:1px; background:var(--line); background-image:linear-gradient(var(--line) 60%, transparent 0); background-size:1px 8px;}
+  .t-item{position:relative; padding-bottom:30px;}
+  .t-item:last-child{padding-bottom:0;}
+  .t-item::before{content:""; position:absolute; left:-26px; top:3px; width:11px; height:11px; border-radius:50%; background:var(--surface); border:2px solid var(--accent);}
+  .t-item .t-year{font-family:'IBM Plex Mono',monospace; color:var(--accent); font-size:.8rem; font-weight:600;}
+  .t-item h4{font-size:1rem; margin:4px 0 3px; font-family:'Inter',sans-serif; font-weight:600;}
+  .t-item p{color:var(--ink-muted); font-size:.88rem;}
+
+  /* skills */
+  .skills-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:18px; position:relative; margin-top:38px;}
+  .skills-grid::before{
+    content:"";
+    position:absolute; top:-25px; left:1%; right:1%; height:1px;
+    background-image:linear-gradient(to right, var(--line) 55%, transparent 0%);
+    background-size:9px 1px; background-repeat:repeat-x;
+  }
+  .skill-card{
+    position:relative;
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:24px 22px 22px; transition:.25s;
+  }
+  .skill-card::before{
+    content:""; position:absolute; left:50%; top:-25px; width:1px; height:25px;
+    background-image:linear-gradient(var(--line) 55%, transparent 0%); background-size:1px 6px; transform:translateX(-50%);
+  }
+  .skill-card::after{
+    content:""; position:absolute; left:50%; top:-28px; width:7px; height:7px; border-radius:50%;
+    background:var(--surface); border:2px solid var(--accent); transform:translateX(-50%);
+  }
+  .skill-card:hover{border-color:var(--accent); transform:translateY(-3px); box-shadow:var(--shadow);}
+  .layer-tag{font-family:'IBM Plex Mono',monospace; font-size:.68rem; color:var(--ink-muted); letter-spacing:.06em; margin-bottom:8px; display:block;}
+  .skill-card h3{font-family:'IBM Plex Mono',monospace; font-size:.88rem; text-transform:uppercase; letter-spacing:.03em; color:var(--accent); margin-bottom:8px;}
+  .layer-desc{font-size:.78rem; color:var(--ink-muted); margin-bottom:16px; line-height:1.5; padding-bottom:14px; border-bottom:1px dashed var(--line);}
+  .skill-card ul{list-style:none; display:grid; gap:11px;}
+  .skill-card li{display:flex; justify-content:space-between; align-items:center; gap:10px;}
+  .skill-name{font-size:.85rem; color:var(--ink); line-height:1.3;}
+  .skill-name em{font-style:normal; color:var(--ink-muted); font-size:.75rem; display:block;}
+  .meter{display:flex; gap:3px; flex-shrink:0;}
+  .meter i{width:6px; height:6px; border-radius:1.5px; background:var(--line); display:block;}
+  .meter i.on{background:var(--accent);}
+  .meter i.learning{background:var(--amber);}
+  .meter-legend{display:flex; gap:22px; flex-wrap:wrap; margin-top:20px; font-family:'IBM Plex Mono',monospace; font-size:.72rem; color:var(--ink-muted); align-items:center;}
+  .meter-legend .lg-item{display:flex; align-items:center; gap:7px;}
+  .meter-legend .sw{width:6px; height:6px; border-radius:1.5px;}
+
+  /* projects */
+  .filter-row{display:flex; gap:9px; flex-wrap:wrap; margin-bottom:32px;}
+  .filter-btn{
+    font-family:'IBM Plex Mono',monospace; font-size:.78rem;
+    padding:8px 14px; border-radius:99px; border:1px solid var(--line);
+    background:var(--surface); color:var(--ink-muted); cursor:pointer; transition:.2s;
+  }
+  .filter-btn.active, .filter-btn:hover{border-color:var(--accent); color:var(--accent);}
+  .projects-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:20px;}
+  .project-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:26px; display:flex; flex-direction:column; transition:.25s;
+  }
+  .project-card:hover{transform:translateY(-4px); box-shadow:var(--shadow); border-color:var(--accent);}
+  .project-top{display:flex; justify-content:space-between; align-items:flex-start; gap:10px; margin-bottom:10px;}
+  .project-card h3{font-size:1.15rem;}
+  .status-badge{
+    font-family:'IBM Plex Mono',monospace; font-size:.66rem; white-space:nowrap;
+    padding:4px 10px; border-radius:99px; border:1px solid var(--line);
+    display:inline-flex; align-items:center; gap:5px; color:var(--ink-muted); flex-shrink:0;
+  }
+  .status-badge::before{content:""; width:5px; height:5px; border-radius:50%; background:currentColor;}
+  .status-badge.complete{color:var(--success); border-color:var(--success);}
+  .status-badge.progress{color:var(--amber); border-color:var(--amber);}
+  .status-badge.live{color:var(--accent); border-color:var(--accent);}
+  .project-card p.desc{color:var(--ink-muted); font-size:.92rem; margin-bottom:16px; flex:1;}
+  .p-tags{display:flex; flex-wrap:wrap; gap:7px; margin-bottom:18px;}
+  .p-links{display:flex; gap:10px; border-top:1px solid var(--line); padding-top:16px;}
+  .p-links a{font-family:'IBM Plex Mono',monospace; font-size:.78rem; color:var(--ink); display:flex; align-items:center; gap:5px;}
+  .p-links a:hover{color:var(--accent);}
+
+  /* experience */
+  .exp-grid{display:grid; grid-template-columns:1fr 1fr; gap:22px;}
+  .exp-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:26px;}
+  .exp-card .role{font-family:'IBM Plex Mono',monospace; font-size:.76rem; color:var(--accent); margin-bottom:6px; display:flex; justify-content:space-between; align-items:center; gap:10px;}
+  .exp-card .role .exp-date{color:var(--ink-muted); font-size:.72rem; white-space:nowrap;}
+  .exp-card .company{font-size:.82rem; color:var(--ink-muted); margin-bottom:14px; margin-top:-8px;}
+  .exp-card h3{font-size:1.15rem; margin-bottom:12px;}
+  .exp-card ul{list-style:none; display:grid; gap:9px;}
+  .exp-card li{font-size:.9rem; color:var(--ink-muted); padding-left:16px; position:relative;}
+  .exp-card li::before{content:"—"; position:absolute; left:0; color:var(--ink-muted); opacity:.6;}
+
+  /* education */
+  .edu-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:28px; margin-bottom:18px;}
+  .edu-top{display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-bottom:6px;}
+  .edu-card h3{font-size:1.2rem;}
+  .edu-meta{font-family:'IBM Plex Mono',monospace; font-size:.78rem; color:var(--ink-muted);}
+  .edu-tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;}
+
+  /* certificates */
+  .cert-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px;}
+  .cert-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:22px; text-align:left; transition:.2s;}
+  .cert-card:hover{border-color:var(--amber); transform:translateY(-3px);}
+  .cert-icon{width:34px; height:34px; border-radius:8px; background:var(--tag-bg); display:flex; align-items:center; justify-content:center; margin-bottom:14px; color:var(--amber); font-family:'IBM Plex Mono',monospace; font-weight:600;}
+  .cert-card h4{font-size:.98rem; margin-bottom:8px;}
+  .cert-card p{font-size:.82rem; color:var(--ink-muted); margin-bottom:14px;}
+  .cert-link{font-family:'IBM Plex Mono',monospace; font-size:.75rem; color:var(--accent);}
+
+  /* contact */
+  .contact-grid{display:grid; grid-template-columns:.9fr 1.1fr; gap:50px;}
+  .contact-info h2{font-size:clamp(1.7rem,3vw,2.3rem); margin-bottom:16px;}
+  .contact-info p{color:var(--ink-muted); margin-bottom:24px; max-width:40ch;}
+  .contact-list{display:grid; gap:14px;}
+  .contact-list a, .contact-list div{
+    display:flex; justify-content:space-between; align-items:center;
+    font-family:'IBM Plex Mono',monospace; font-size:.85rem;
+    padding:13px 16px; border:1px solid var(--line); border-radius:9px;
+    background:var(--surface); color:var(--ink);
+  }
+  .contact-list a:hover{border-color:var(--accent); color:var(--accent);}
+  form{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:28px; box-shadow:var(--shadow);}
+  .form-row{margin-bottom:18px;}
+  label{font-family:'IBM Plex Mono',monospace; font-size:.76rem; color:var(--ink-muted); display:block; margin-bottom:7px;}
+  input, textarea{
+    width:100%; background:var(--bg-alt); border:1px solid var(--line); border-radius:8px;
+    padding:12px 14px; font-family:'Inter',sans-serif; color:var(--ink); font-size:.92rem;
+    transition:.2s;
+  }
+  input:focus, textarea:focus{outline:none; border-color:var(--accent);}
+  textarea{resize:vertical; min-height:110px;}
+  .form-note{font-size:.78rem; color:var(--ink-muted); margin-top:12px; font-family:'IBM Plex Mono',monospace;}
+
+  footer{border-top:1px solid var(--line); padding:34px 0; }
+  .footer-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;}
+  .footer-row p{font-size:.82rem; color:var(--ink-muted); font-family:'IBM Plex Mono',monospace;}
+  .to-top{border:1px solid var(--line); border-radius:8px; padding:8px 12px; font-family:'IBM Plex Mono',monospace; font-size:.78rem; cursor:pointer; background:var(--surface); color:var(--ink-muted);}
+  .to-top:hover{color:var(--accent); border-color:var(--accent);}
+
+  @media (max-width: 880px){
+    .nav-links{display:none;}
+    .menu-btn{display:flex; align-items:center; justify-content:center;}
+    .hero-grid, .about-grid, .contact-grid, .exp-grid{grid-template-columns:1fr;}
+    .skills-grid{grid-template-columns:repeat(2,1fr);}
+    .projects-grid{grid-template-columns:1fr;}
+    .cert-grid{grid-template-columns:repeat(2,1fr);}
+    section{padding:60px 0;}
+    .hero{padding:56px 0 40px;}
+  }
+  @media (max-width: 500px){
+    .skills-grid, .cert-grid{grid-template-columns:1fr;}
+    .wrap{padding:0 18px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+    html{scroll-behavior:auto;}
+  }
+
+  /* mobile drawer */
+  .drawer{
+    position:fixed; inset:0 0 0 auto; width:78%; max-width:320px; background:var(--surface);
+    border-left:1px solid var(--line); z-index:100; padding:24px; transform:translateX(100%);
+    transition:transform .3s ease; display:flex; flex-direction:column; gap:6px;
+  }
+  .drawer.open{transform:translateX(0);}
+  .drawer a{font-family:'IBM Plex Mono',monospace; padding:12px 4px; border-bottom:1px solid var(--line); font-size:.9rem;}
+  .scrim{position:fixed; inset:0; background:rgba(0,0,0,.4); z-index:90; opacity:0; pointer-events:none; transition:.3s;}
+  .scrim.show{opacity:1; pointer-events:auto;}
+</style>
 </head>
+<body data-theme="light">
 
-<body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="logo" href="#top" aria-label="Go to top">RS</a>
-
-      <nav class="nav" aria-label="Primary navigation">
-        <div class="nav-links">
-          <a href="#projects">Projects</a>
-          <a href="#skills">Skills</a>
-          <a href="#experience">Experience</a>
-          <a href="#education">Education</a>
-          <a href="#certifications">Certificates</a>
-          <a href="#contact" class="primary">Contact</a>
-        </div>
-        <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileDrawer">
-          <span class="sr-only">Open menu</span>
-          <span class="burger"></span>
-        </button>
-      </nav>
-
-      <!-- Mobile Drawer -->
-      <div class="mobile-drawer" id="mobileDrawer">
-        <div class="drawer-header">
-          <span class="drawer-logo">RS</span>
-          <button class="drawer-close" id="drawerClose">&times;</button>
-        </div>
-
-        <div class="drawer-links">
-          <a href="#projects">Projects</a>
-          <a href="#skills">Skills</a>
-          <a href="#experience">Experience</a>
-          <a href="#education">Education</a>
-          <a href="#certifications">Certificates</a>
-          <a href="#contact" class="primary">Contact</a>
-        </div>
-      </div>
-
-      <div class="drawer-overlay" id="drawerOverlay"></div>
+<header>
+  <nav class="wrap">
+    <a href="#top" class="logo">RS<span>_</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#certificates">Certificates</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode">◐</button>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
     </div>
-  </header>
+  </nav>
+</header>
 
-  <main id="top">
-    <section class="hero">
-      <div class="container hero-grid">
-        <div>
-          <p class="eyebrow">BSc Computer Science with AI • Placement Seeking 2025–2026</p>
-          <h1>Hi, I’m <span class="accent">Rahul</span>.<br />I build practical software.</h1>
-          <p class="lead">
-            I focus on <strong>full-stack web apps</strong>, <strong>database design</strong>, and strong fundamentals
-            in <strong>Java</strong>, <strong>Python</strong>, and <strong>SQL</strong>.
-          </p>
+<div class="scrim" id="scrim"></div>
+<div class="drawer" id="drawer">
+  <a href="#about">About</a>
+  <a href="#skills">Skills</a>
+  <a href="#projects">Projects</a>
+  <a href="#experience">Experience</a>
+  <a href="#education">Education</a>
+  <a href="#certificates">Certificates</a>
+  <a href="#contact">Contact</a>
+</div>
 
-          <div class="hero-cta">
-            <a class="btn" href="#projects">View Projects</a>
-            <a class="btn btn-ghost" href="#contact">Contact</a>
-          </div>
+<main id="top">
 
-          <div class="chips" aria-label="Highlights">
-            <span class="chip">PHP + MySQL</span>
-            <span class="chip">Java OOP</span>
-            <span class="chip">SQL Joins & Aggregation</span>
-            <span class="chip">Python ML Basics</span>
-            <span class="chip">Linux + Git</span>
-          </div>
-        </div>
-
-        <aside class="hero-card" aria-label="Quick info">
-          <div class="hero-card-top">
-            <div class="avatar" aria-hidden="true">RS</div>
-            <div>
-              <p class="name">Rahul Shrestha</p>
-              <p class="meta">Huddersfield, UK • Student Developer</p>
-            </div>
-          </div>
-
-          <div class="hero-card-body">
-            <div class="stat">
-              <p class="stat-num" id="statProjects">0</p>
-              <p class="stat-label">Projects</p>
-            </div>
-            <div class="stat">
-              <p class="stat-num" id="statTech">0</p>
-              <p class="stat-label">Core Tech</p>
-            </div>
-            <div class="stat">
-              <p class="stat-num" id="statFocus">0</p>
-              <p class="stat-label">Focus Areas</p>
-            </div>
-          </div>
-
-          <div class="hero-card-actions">
-            <a class="btn btn-small cv-btn" id="cvBtn" href="#">
-              👁 View CV
-            </a>
-            <a class="btn btn-small btn-ghost" id="cvDownload" href="/pdf/Rahul_Shrestha_CV.pdf" download>
-              ⬇ Download CV
-            </a>
-
-            <a class="btn btn-small btn-ghost" href="#" id="githubBtn">GitHub</a>
-            <a class="btn btn-small btn-ghost" href="#" id="linkedinBtn">LinkedIn</a>
-          </div>
-          <!-- <p class="fine">
-            Tip: Update the links inside <code>script.js</code> (CV, GitHub, LinkedIn).
-          </p> -->
-        </aside>
-      </div>
-    </section>
-
-    <section class="section" id="skills">
-      <div class="container">
-        <div class="section-head">
-          <h2>Skills</h2>
-          <p>Tools and technologies I’m comfortable using in real projects.</p>
-        </div>
-
-        <div class="skills">
-          <div class="skill-card">
-            <h3>Languages</h3>
-            <ul>
-              <li>Java (OOP, console apps, fundamentals)</li>
-              <li>Python (data prep, ML basics)</li>
-              <li>SQL (joins, aggregation, schema thinking)</li>
-              <li>JavaScript (DOM, UI behavior)</li>
-              <li>PHP (server-side pages, forms, sessions)</li>
-            </ul>
-          </div>
-
-          <div class="skill-card">
-            <h3>Web + Databases</h3>
-            <ul>
-              <li>MySQL / MariaDB</li>
-              <li>Relational schema design</li>
-              <li>Auth patterns (sessions, protected pages)</li>
-              <li>HTML/CSS responsive layout</li>
-              <li>Validation and error handling</li>
-            </ul>
-          </div>
-
-          <div class="skill-card">
-            <h3>Tools</h3>
-            <ul>
-              <li>Git + GitHub (version control)</li>
-              <li>Linux/Ubuntu CLI</li>
-              <li>VS Code</li>
-              <li>XAMPP/phpMyAdmin</li>
-              <li>Documentation-first workflow</li>
-            </ul>
-          </div>
+  <!-- HERO -->
+  <section class="hero" style="border-top:none;">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="kicker"><span class="dot"></span> Open to Software Engineering placements, 2025–2026</div>
+        <h1>Rahul Shrestha —<br><em>Aspiring Software Engineer.</em></h1>
+        <p class="lead">I design backend systems, databases, and full-stack applications using Java, Spring Boot, PostgreSQL and React. BSc Computer Science with AI student at the University of Huddersfield.</p>
+        <div class="hero-ctas">
+          <a href="#projects" class="btn btn-primary">View Projects →</a>
+          <a href="pdf/Rahul_Shrestha_CV.pdf" class="btn btn-ghost" download>↓ Download CV</a>
         </div>
       </div>
-    </section>
 
-    <section class="section" id="projects">
-      <div class="container">
-        <div class="section-head">
-          <h2>Projects</h2>
-          <p>Selected work that shows full-stack, databases, and fundamentals.</p>
-        </div>
-
-        <div class="filters" role="group" aria-label="Project filters">
-          <button class="filter active" data-filter="all">All</button>
-          <button class="filter" data-filter="fullstack">Full-Stack</button>
-          <button class="filter" data-filter="database">Database</button>
-          <button class="filter" data-filter="java">Java</button>
-          <button class="filter" data-filter="ml">ML</button>
-        </div>
-
-        <div class="grid" id="projectGrid">
-        </div>
-      </div>
-    </section>
-
-    <!-- <section id="github">
-  <h2>GitHub Activity</h2>
-
-  <div id="github-profile"></div>
-
-  <div id="repo-list"></div>
-</section> -->
-
-    <section class="section" id="education">
-      <div class="container">
-        <div class="section-head">
-          <h2>Education</h2>
-          <p>Academic background and core areas of study.</p>
-        </div>
-
-        <div class="grid">
-          <div class="card">
-            <h3>BSc Computer Science with Artificial Intelligence</h3>
-            <p><strong>University of Huddersfield, UK</strong></p>
-            <p class="muted">Expected Graduation: 2028</p>
-            <ul>
-              <li>Programming Fundamentals (Java, Python)</li>
-              <li>Database Systems and Web Development</li>
-              <li>Data Structures and Algorithms</li>
-              <li>Software Development Life Cycle (SDLC)</li>
-              <li>Computer Networks and Systems</li>
-              <li>Artificial Intelligence Fundamentals</li>
-            </ul>
+      <div>
+        <div class="id-card">
+          <div class="photo-frame">
+            <img src="images/profile.jpg" alt="Photo of Rahul Shrestha" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="photo-fallback">RS</span>
           </div>
-
-          <div class="card">
-            <h3>Higher Secondary Education (Science)</h3>
-            <p><strong>Herald International College, Kathmandu, Nepal</strong></p>
-            <p class="muted">Completed: 2024</p>
-            <p>Equivalent to UK A-Levels in Science</p>
+          <div>
+            <p class="id-name">Rahul Shrestha</p>
+            <p class="id-meta">Huddersfield, UK · Student Developer</p>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section class="section" id="certifications">
-      <div class="container">
-        <div class="section-head">
-          <h2>Certifications & Awards</h2>
-          <p>Academic recognition and professional development certificates.</p>
-        </div>
-
-        <div class="grid">
-          <div class="card cert-card" data-file="pdf/isc_cert.jpg" data-type="jpg"
-            data-title="Django Framework Certificate">
-            <h3>Top 10 Academic Performance (2025)</h3>
-            <p>
-              Awarded for achieving one of the highest marks during
-              International Year One at the University of Huddersfield.
-            </p>
-            <div class="tags">
-              <span class="tag">Academic Excellence</span>
-              <span class="tag">University of Huddersfield</span>
-            </div>
-            <button class="cert-btn view-cert">
-              📄 View Certificate
-            </button>
-
+        <div class="terminal">
+          <div class="term-bar">
+            <span class="term-dot" style="background:#F1605C"></span>
+            <span class="term-dot" style="background:#F3BB4C"></span>
+            <span class="term-dot" style="background:#48C267"></span>
+            <span class="mono" style="margin-left:8px; font-size:.72rem; color:var(--ink-muted);">query.sql</span>
           </div>
-          <div class="card cert-card" data-file="pdf/django_codeit_certificate.pdf" data-type="pdf"
-            data-title="Django Framework Certificate">
-            <h3>Django Framework Certificate</h3>
-            <p>
-              Completed hands-on training covering Django fundamentals,
-              models, views, templates, and database integration.
-            </p>
-            <div class="tags">
-              <span class="tag">Django</span>
-              <span class="tag">Python</span>
-              <span class="tag">Backend</span>
-            </div>
-            <button class="cert-btn view-cert">
-              📄 View Certificate
-            </button>
-          </div>
-
-          <div class="card cert-card" data-file="pdf/web_development_workshop.pdf" data-type="pdf"
-            data-title="Django Framework Certificate">
-            <h3>Web Development Workshop (7 Days)</h3>
-            <p>
-              Intensive workshop focused on HTML, CSS, JavaScript,
-              and full-stack web development fundamentals.
-            </p>
-            <div class="tags">
-              <span class="tag">HTML</span>
-              <span class="tag">CSS</span>
-              <span class="tag">JavaScript</span>
-            </div>
-            <button class="cert-btn view-cert">
-              📄 View Certificate
-            </button>
-          </div>
-
-
-          <div class="card">
-            <h3>Networking Fundamentals</h3>
-            <p>
-              Verified digital credential demonstrating foundational understanding
-              of computer networking concepts, protocols, and systems.
-            </p>
-
-            <div class="credly-wrapper">
-              <div data-iframe-width="150" data-iframe-height="270"
-                data-share-badge-id="bad36f17-1625-4a76-9c38-049f803aa20c"
-                data-share-badge-host="https://www.credly.com">
-              </div>
-            </div>
-
-            <p class="credly-note">
-              Credential verified via Credly
-            </p>
+          <div class="term-body">
+            <div class="term-row comment">-- who is Rahul?</div>
+            <div class="term-row"><span class="kw">SELECT</span> * <span class="kw">FROM</span> engineers</div>
+            <div class="term-row"><span class="kw">WHERE</span> location = <span class="str">'Huddersfield, UK'</span></div>
+            <div class="term-row"><span class="kw">AND</span> focus = <span class="str">'backend + full-stack'</span></div>
+            <div class="term-row"><span class="kw">AND</span> status = <span class="str">'seeking placement'</span>;<span class="cursor"></span></div>
           </div>
         </div>
 
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Certificate Viewer (PDF / Image) -->
-    <div class="cert-modal" id="certModal" aria-hidden="true">
-      <div class="cert-backdrop" id="certBackdrop"></div>
-
-      <div class="cert-viewer">
-        <div class="cert-header">
-          <span class="cert-title" id="certTitle">Certificate</span>
-          <button class="cert-close" id="closeModal">&times;</button>
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="eyebrow"><span class="num">01</span> about</div>
+      <div class="about-grid">
+        <div class="reveal">
+          <div class="origin">
+            <div>🇳🇵 From Nepal</div>
+            <div>🇬🇧 Based in Huddersfield</div>
+            <div>🎓 Expected graduation 2028</div>
+          </div>
+          <p>I'm a Computer Science student at the University of Huddersfield, studying towards a BSc with Artificial Intelligence, originally from Kathmandu, Nepal. I enjoy solving backend problems, designing relational schemas, and understanding how systems fit together end to end — from a database table to the page a user actually sees.</p>
+          <p>Right now I'm building full-stack projects with PHP, MySQL and JavaScript, sharpening my SQL and data-structures fundamentals in Java, and getting hands-on with Python for basic machine learning. I'm also exploring Spring Boot, PostgreSQL and React to grow toward backend-focused, production-style engineering.</p>
+          <p>Outside coding, I balance university with part-time work, which has shaped my reliability, time management, and ability to communicate clearly under pressure — skills I bring into every team project.</p>
+          <ul class="interest-list">
+            <li>Backend engineering &amp; API design</li>
+            <li>Relational database design</li>
+            <li>Data structures &amp; algorithms</li>
+            <li>Applied machine learning fundamentals</li>
+          </ul>
         </div>
 
-        <div class="cert-body">
-          <!-- PDF or Image injected here -->
-          <iframe id="certFrame" title="Certificate Viewer"></iframe>
-          <img id="certImage" alt="Certificate preview" />
-        </div>
-
-        <div class="cert-footer">
-          <a id="downloadCert" class="cert-download" download>
-            ⬇ Download PDF
-          </a>
+        <div class="reveal timeline">
+          <div class="t-item">
+            <div class="t-year">2024</div>
+            <h4>Started BSc Computer Science with AI</h4>
+            <p>University of Huddersfield, UK — after completing Science-stream higher secondary education in Kathmandu.</p>
+          </div>
+          <div class="t-item">
+            <div class="t-year">2025</div>
+            <h4>Top 10 academic performance</h4>
+            <p>Recognised for one of the highest marks in International Year One.</p>
+          </div>
+          <div class="t-item">
+            <div class="t-year">2025–2026</div>
+            <h4>Building &amp; seeking placement</h4>
+            <p>Shipping full-stack, database and ML projects while applying for Software Engineering placements.</p>
+          </div>
+          <div class="t-item">
+            <div class="t-year">2028</div>
+            <h4>Expected graduation</h4>
+            <p>BSc Computer Science with Artificial Intelligence, University of Huddersfield.</p>
+          </div>
         </div>
       </div>
     </div>
+  </section>
 
-    <section class="section" id="experience">
-      <div class="container">
-        <div class="section-head">
-          <h2>Experience</h2>
-          <p>What I’ve done alongside study.</p>
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="wrap">
+      <div class="eyebrow"><span class="num">02</span> skills</div>
+      <div class="section-head">
+        <h2>How a request moves through what I build.</h2>
+        <p>Not a buzzword list — this is the actual stack, bottom to top: a query hits the data layer, logic runs on the server, the result reaches a screen, and tooling holds the whole thing together.</p>
+      </div>
+      <div class="skills-grid">
+
+        <div class="skill-card reveal">
+          <span class="layer-tag">L01 → DATA LAYER</span>
+          <h3>Storage</h3>
+          <p class="layer-desc">Where the truth lives. Schemas, queries and the reasoning behind them.</p>
+          <ul>
+            <li><span class="skill-name">SQL<em>joins &amp; aggregation</em></span><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></li>
+            <li><span class="skill-name">MySQL / MariaDB</span><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></li>
+            <li><span class="skill-name">Relational schema design</span><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></li>
+            <li><span class="skill-name">Python<em>data prep, ML basics</em></span><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></li>
+            <li><span class="skill-name">PostgreSQL</span><span class="meter"><i class="learning"></i><i></i><i></i><i></i><i></i></span></li>
+          </ul>
         </div>
 
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="dot" aria-hidden="true"></div>
-            <div class="timeline-content">
-              <h3>Student Projects (University)</h3>
-              <p class="muted">Full-stack + databases + ML fundamentals</p>
-              <ul>
-                <li>Built database-driven applications with PHP/MySQL and dynamic pages</li>
-                <li>Practised joins, grouping, ranking queries, and data validation</li>
-                <li>Implemented DSA concepts and wrote complexity notes</li>
-              </ul>
-            </div>
-          </div>
+        <div class="skill-card reveal">
+          <span class="layer-tag">L02 → SERVER LAYER</span>
+          <h3>Logic</h3>
+          <p class="layer-desc">Where rules live. Auth, validation, and the decisions between request and response.</p>
+          <ul>
+            <li><span class="skill-name">Java<em>OOP, fundamentals</em></span><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></li>
+            <li><span class="skill-name">PHP<em>server-side, sessions</em></span><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></li>
+            <li><span class="skill-name">Auth patterns &amp; sessions</span><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></li>
+            <li><span class="skill-name">Validation &amp; error handling</span><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></li>
+            <li><span class="skill-name">Django<em>blog project, in progress</em></span><span class="meter"><i class="learning"></i><i class="learning"></i><i></i><i></i><i></i></span></li>
+            <li><span class="skill-name">Spring Boot</span><span class="meter"><i class="learning"></i><i class="learning"></i><i></i><i></i><i></i></span></li>
+          </ul>
+        </div>
 
-          <div class="timeline-item">
-            <div class="dot" aria-hidden="true"></div>
-            <div class="timeline-content">
-              <h3>Part-time Work (Agency / Support roles)</h3>
-              <p class="muted">Reliability • time management • communication</p>
-              <ul>
-                <li>Balanced university workload with consistent shifts</li>
-                <li>Worked in fast-paced environments with strong professionalism</li>
-                <li>Improved confidence communicating with different teams and people</li>
-              </ul>
-            </div>
+        <div class="skill-card reveal">
+          <span class="layer-tag">L03 → CLIENT LAYER</span>
+          <h3>Interface</h3>
+          <p class="layer-desc">Where it becomes usable. What a person actually sees and touches.</p>
+          <ul>
+            <li><span class="skill-name">JavaScript<em>DOM, UI behaviour</em></span><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></li>
+            <li><span class="skill-name">Responsive HTML/CSS</span><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></li>
+            <li><span class="skill-name">REST API design</span><span class="meter"><i class="learning"></i><i class="learning"></i><i></i><i></i><i></i></span></li>
+            <li><span class="skill-name">React</span><span class="meter"><i class="learning"></i><i></i><i></i><i></i><i></i></span></li>
+          </ul>
+        </div>
+
+        <div class="skill-card reveal">
+          <span class="layer-tag">L04 → INFRA &amp; WORKFLOW</span>
+          <h3>Tooling</h3>
+          <p class="layer-desc">How it ships and stays maintainable, not just how it runs once.</p>
+          <ul>
+            <li><span class="skill-name">Git + GitHub</span><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></li>
+            <li><span class="skill-name">Linux / Ubuntu CLI</span><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></li>
+            <li><span class="skill-name">VS Code</span><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></li>
+            <li><span class="skill-name">XAMPP / phpMyAdmin</span><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></li>
+            <li><span class="skill-name">Documentation-first workflow</span><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="meter-legend">
+        <div class="lg-item"><span class="sw" style="background:var(--accent)"></span> Comfortable in real projects</div>
+        <div class="lg-item"><span class="sw" style="background:var(--amber)"></span> Currently learning</div>
+        <div class="lg-item"><span class="sw" style="background:var(--line)"></span> Not started yet</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="eyebrow"><span class="num">03</span> projects</div>
+      <div class="section-head">
+        <h2>Selected work.</h2>
+        <p>Full-stack builds, database work and coursework — filter by focus area.</p>
+      </div>
+      <div class="filter-row" id="filterRow">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="fullstack">Full-Stack</button>
+        <button class="filter-btn" data-filter="database">Database</button>
+        <button class="filter-btn" data-filter="java">Java</button>
+        <button class="filter-btn" data-filter="ml">ML</button>
+      </div>
+      <div class="projects-grid" id="projectsGrid">
+
+        <div class="project-card reveal" data-cat="fullstack database">
+          <div class="project-top"><h3>Database-Driven Web App</h3><span class="status-badge complete">Complete</span></div>
+          <p class="desc">Full-stack PHP + MySQL app with a relational schema, dynamic pages, validation and authentication patterns.</p>
+          <div class="p-tags"><span class="tag">PHP</span><span class="tag">MySQL</span><span class="tag">JavaScript</span><span class="tag">Full-Stack</span></div>
+          <div class="p-links"><a href="https://github.com/shrestha-r/Poppleton-Dog-Show" target="_blank" rel="noopener">↗ Repo</a></div>
+        </div>
+
+        <div class="project-card reveal" data-cat="ml">
+          <div class="project-top"><h3>Stock Price Prediction</h3><span class="status-badge complete">Complete</span></div>
+          <p class="desc">Regression models in Python — Linear Regression vs Random Forest — evaluated with MAE, RMSE and R², with critical discussion of results.</p>
+          <div class="p-tags"><span class="tag">Python</span><span class="tag">ML</span><span class="tag">Regression</span></div>
+          <div class="p-links">
+            <a href="https://github.com/shrestha-r/Year2/tree/main/Machine%20Learning/U2550807_Assignment2/Assignment2" target="_blank" rel="noopener">↗ Repo</a>
+            <a href="https://colab.research.google.com/drive/1Ub4eCtg-61_3D9JeaygXwsyL7cJ98DCk?usp=drive_link" target="_blank" rel="noopener">↗ Colab</a>
+          </div>
+        </div>
+
+        <div class="project-card reveal" data-cat="java">
+          <div class="project-top"><h3>DSA Practice — Trees / Hash</h3><span class="status-badge progress">Ongoing</span></div>
+          <p class="desc">Java implementations of core data structures with notes on edge cases and time/space complexity reasoning.</p>
+          <div class="p-tags"><span class="tag">Java</span><span class="tag">DSA</span><span class="tag">Complexity</span></div>
+          <div class="p-links"><a href="https://github.com/shrestha-r/Year2/tree/main/Data%20Structure/DataStructues" target="_blank" rel="noopener">↗ Repo</a></div>
+        </div>
+
+        <div class="project-card reveal" data-cat="database">
+          <div class="project-top"><h3>SQL Query Pack</h3><span class="status-badge complete">Complete</span></div>
+          <p class="desc">A collection of join and aggregation queries with plain-English explanations, focused on correctness and readability.</p>
+          <div class="p-tags"><span class="tag">SQL</span><span class="tag">MySQL</span><span class="tag">Joins</span></div>
+          <div class="p-links"><a href="https://github.com/shrestha-r/Poppleton-Dog-Show" target="_blank" rel="noopener">↗ Repo</a></div>
+        </div>
+
+        <div class="project-card reveal" data-cat="fullstack">
+          <div class="project-top"><h3>Portfolio Website</h3><span class="status-badge live">Live</span></div>
+          <p class="desc">This site's earlier version — a responsive layout with project filtering, theming, and contact form behaviour, built from scratch.</p>
+          <div class="p-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+          <div class="p-links">
+            <a href="https://github.com/shrestha-r/rahul-shrestha" target="_blank" rel="noopener">↗ Repo</a>
+            <a href="https://rahul-shrestha.com.np" target="_blank" rel="noopener">↗ Live Site</a>
           </div>
         </div>
 
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="section" id="contact">
-      <div class="container">
-        <div class="section-head">
-          <h2>Contact</h2>
-          <p>Want to discuss a placement role or project? Send a message.</p>
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="wrap">
+      <div class="eyebrow"><span class="num">04</span> experience</div>
+      <div class="section-head">
+        <h2>What I've done alongside study.</h2>
+      </div>
+      <div class="exp-grid">
+
+        <div class="exp-card reveal">
+          <div class="role mono">General Assistant <span class="exp-date">Jul 2025 – Present</span></div>
+          <div class="company">Belgium Waffle Company</div>
+          <ul>
+            <li>Processed orders and managed customer service operations</li>
+            <li>Worked in fast-paced team environments</li>
+            <li>Maintained accuracy and attention to detail under pressure</li>
+          </ul>
         </div>
 
-        <div class="contact-grid">
-          <div class="contact-card">
-            <h3>Quick Links</h3>
-            <div class="link-list">
-              <a href="https://github.com/shrestha-r" id="contactGithub">GitHub</a>
-              <a href="https://www.linkedin.com/in/rahulshrestha61/" id="contactLinkedin">LinkedIn</a>
-              <a href="mailto:rahulshrestha8102@gmail.com" id="contactEmail">Email</a>
-            </div>
+        <div class="exp-card reveal">
+          <div class="role mono">Student Digital Leader <span class="exp-date">Dec 2024 – Present</span></div>
+          <div class="company">University of Huddersfield</div>
+          <ul>
+            <li>Provided technical support for software installation and troubleshooting</li>
+            <li>Assisted students with digital tools and academic systems</li>
+            <li>Supported onboarding, documentation, and CV guidance</li>
+            <li>Delivered training to improve digital literacy</li>
+          </ul>
+        </div>
 
-            <div class="availability">
-              <p><strong>Placement:</strong> 2025–2026</p>
-              <p><strong>Location:</strong> Huddersfield / Hybrid / Remote</p>
-              <p><strong>Roles:</strong> Software, Full-Stack, Backend, Data/AI (Junior)</p>
-            </div>
-          </div>
+        <div class="exp-card reveal">
+          <div class="role mono">Production &amp; Warehouse Operation <span class="exp-date">Dec 2024 – May 2025</span></div>
+          <div class="company">Buckley and Sons</div>
+          <ul>
+            <li>Ensured accurate product handling and tracking</li>
+            <li>Supported operational efficiency and quality control</li>
+            <li>Followed strict health and safety procedures</li>
+          </ul>
+        </div>
 
-          <form class="contact-form" action="https://formspree.io/f/mbddyjzr" method="POST">
+        <div class="exp-card reveal">
+          <div class="role mono">Office Assistant <span class="exp-date">Jun 2023 – Sep 2024</span></div>
+          <div class="company">Nepal Rastriya Prativa Campus</div>
+          <ul>
+            <li>Managed records, reports, and administrative documentation</li>
+            <li>Maintained data accuracy across filing systems</li>
+            <li>Supported office workflows and information management</li>
+          </ul>
+        </div>
 
-            <label>
-              Name
-              <input type="text" name="name" placeholder="Your name" required />
-            </label>
+      </div>
+    </div>
+  </section>
 
-            <label>
-              Email
-              <input type="email" name="email" placeholder="your@email.com" required />
-            </label>
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="wrap">
+      <div class="eyebrow"><span class="num">05</span> education</div>
+      <div class="section-head">
+        <h2>Academic background.</h2>
+      </div>
 
-            <label>
-              Message
-              <textarea name="message" rows="6" placeholder="Tell me about the role or project..." required></textarea>
-            </label>
-
-            <!-- Professional extras -->
-            <input type="hidden" name="_subject" value="New Portfolio Contact">
-            <input type="text" name="_gotcha" style="display:none">
-            <input type="hidden" name="_next" value="https://yourusername.github.io/portfolio/thanks.html">
-
-            <button class="btn" type="submit">Send Message</button>
-          </form>
-
+      <div class="edu-card reveal">
+        <div class="edu-top">
+          <h3>BSc Computer Science with Artificial Intelligence</h3>
+          <span class="edu-meta">Expected 2028</span>
+        </div>
+        <p style="color:var(--ink-muted); font-size:.9rem;">University of Huddersfield, UK</p>
+        <div class="edu-tags">
+          <span class="tag">Programming Fundamentals (Java, Python)</span>
+          <span class="tag">Database Systems &amp; Web Dev</span>
+          <span class="tag">Data Structures &amp; Algorithms</span>
+          <span class="tag">SDLC</span>
+          <span class="tag">Computer Networks</span>
+          <span class="tag">AI Fundamentals</span>
         </div>
       </div>
-    </section>
 
-    <footer class="footer">
-      <div class="container footer-inner">
-        <p>© <span id="year"></span> Rahul Shrestha</p>
-        <p class="muted">Built with HTML/CSS/JS • Lightweight • Fast</p>
+      <div class="edu-card reveal">
+        <div class="edu-top">
+          <h3>Higher Secondary Education (Science)</h3>
+          <span class="edu-meta">Completed 2024</span>
+        </div>
+        <p style="color:var(--ink-muted); font-size:.9rem;">Herald International College, Kathmandu, Nepal — equivalent to UK A-Levels in Science.</p>
       </div>
-    </footer>
-  </main>
+    </div>
+  </section>
 
-  <script src="script.js"></script>
-  <script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ABCD1234EF"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
+  <!-- CERTIFICATES -->
+  <section id="certificates">
+    <div class="wrap">
+      <div class="eyebrow"><span class="num">06</span> certificates</div>
+      <div class="section-head">
+        <h2>Certifications &amp; awards.</h2>
+      </div>
+      <div class="cert-grid">
+        <div class="cert-card reveal">
+          <div class="cert-icon">★</div>
+          <h4>Top 10 Academic Performance</h4>
+          <p>Awarded for one of the highest marks in International Year One, University of Huddersfield.</p>
+          <a href="pdf/isc_cert.jpg" target="_blank" rel="noopener" class="cert-link">📄 View Certificate</a>
+        </div>
+        <div class="cert-card reveal">
+          <div class="cert-icon">DJ</div>
+          <h4>Django Framework Certificate</h4>
+          <p>Hands-on training covering Django fundamentals, models, views, templates and DB integration.</p>
+          <a href="pdf/django_codeit_certificate.pdf" target="_blank" rel="noopener" class="cert-link">📄 View Certificate</a>
+        </div>
+        <div class="cert-card reveal">
+          <div class="cert-icon">WD</div>
+          <h4>Web Development Workshop</h4>
+          <p>7-day intensive on HTML, CSS, JavaScript and full-stack web development fundamentals.</p>
+          <a href="pdf/web_development_workshop.pdf" target="_blank" rel="noopener" class="cert-link">📄 View Certificate</a>
+        </div>
+        <div class="cert-card reveal">
+          <div class="cert-icon">NW</div>
+          <h4>Networking Fundamentals</h4>
+          <p>Verified digital credential on core networking concepts, protocols and systems.</p>
+          <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="bad36f17-1625-4a76-9c38-049f803aa20c" data-share-badge-host="https://www.credly.com" style="margin-top:6px;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    gtag('config', 'G-JRHQPM54M9');
-  </script>
-  <script src="github.js"></script>
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap contact-grid">
+      <div class="contact-info reveal">
+        <div class="eyebrow"><span class="num">07</span> contact</div>
+        <h2>Let's talk about a placement.</h2>
+        <p>Looking for a software engineering, backend or data/AI placement student for 2025–2026? I'd love to hear from you — I typically respond within 24 hours.</p>
+        <div class="contact-list">
+          <a href="mailto:rahulshrestha8102@gmail.com">Email <span>↗</span></a>
+          <a href="https://github.com/shrestha-r" target="_blank" rel="noopener">GitHub — @shrestha-r <span>↗</span></a>
+          <a href="https://github.com/myCodingCenter" target="_blank" rel="noopener">GitHub — @myCodingCenter <span>↗</span></a>
+          <a href="https://www.linkedin.com/in/rahulshrestha61/" target="_blank" rel="noopener">LinkedIn <span>↗</span></a>
+          <div>Location <span>Huddersfield, UK</span></div>
+          <div>Roles <span>Software · Backend · Data/AI</span></div>
+        </div>
+      </div>
 
+      <form id="contactForm" class="reveal" action="https://formspree.io/f/mbddyjzr" method="POST">
+        <div class="form-row">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" placeholder="Your name" required>
+        </div>
+        <div class="form-row">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="your@email.com" required>
+        </div>
+        <div class="form-row">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Tell me about the role or project…" required></textarea>
+        </div>
+        <input type="hidden" name="_subject" value="New Portfolio Contact — Placement Inquiry">
+        <input type="text" name="_gotcha" style="display:none">
+        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Send Message →</button>
+        <p class="form-note" id="formNote">Sent straight to my inbox via Formspree — no backend required.</p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    <p>© <span id="year"></span> Rahul Shrestha — Built with HTML, CSS &amp; JavaScript.</p>
+    <button class="to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Back to top</button>
+  </div>
+</footer>
+
+<script>
+  // year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // theme toggle
+  const themeBtn = document.getElementById('themeBtn');
+  const body = document.body;
+  function setTheme(t){
+    body.setAttribute('data-theme', t);
+    themeBtn.textContent = t === 'dark' ? '◑' : '◐';
+  }
+  const preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  setTheme(preferred);
+  themeBtn.addEventListener('click', () => {
+    const next = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    setTheme(next);
+  });
+
+  // mobile drawer
+  const menuBtn = document.getElementById('menuBtn');
+  const drawer = document.getElementById('drawer');
+  const scrim = document.getElementById('scrim');
+  function closeDrawer(){ drawer.classList.remove('open'); scrim.classList.remove('show'); }
+  menuBtn.addEventListener('click', () => { drawer.classList.add('open'); scrim.classList.add('show'); });
+  scrim.addEventListener('click', closeDrawer);
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrawer));
+
+  // scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+
+  // project filtering
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const projectCards = document.querySelectorAll('.project-card');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      projectCards.forEach(card => {
+        const show = f === 'all' || card.dataset.cat.includes(f);
+        card.style.display = show ? 'flex' : 'none';
+      });
+    });
+  });
+
+  // contact form -> real Formspree endpoint
+  const form = document.getElementById('contactForm');
+  const note = document.getElementById('formNote');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    note.textContent = 'Sending…';
+    note.style.color = 'var(--ink-muted)';
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        note.textContent = 'Thanks — your message is on its way. I\'ll reply within 24 hours.';
+        note.style.color = 'var(--success)';
+        form.reset();
+      } else {
+        note.textContent = 'Something went wrong — please email me directly instead.';
+        note.style.color = 'var(--amber)';
+      }
+    } catch (err) {
+      note.textContent = 'Network error — please email me directly instead.';
+      note.style.color = 'var(--amber)';
+    }
+  });
+</script>
+
+<script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
 </body>
-
 </html>
